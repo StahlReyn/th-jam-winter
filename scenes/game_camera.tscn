@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cv51hdonthxaq"]
+
+[ext_resource type="Script" uid="uid://cybjxwevadxxi" path="res://scenes/game_camera.gd" id="1_1qhs2"]
+[ext_resource type="Script" uid="uid://diui0487b13ki" path="res://scenes/player_ui.gd" id="2_qq1a7"]
+
+[node name="GameCamera" type="Camera2D" unique_id=720590421]
+script = ExtResource("1_1qhs2")
+metadata/_custom_type_script = "uid://cybjxwevadxxi"
+
+[node name="PlayerUI" type="Node2D" parent="." unique_id=1818529684]
+script = ExtResource("2_qq1a7")
+
+[node name="Bars" type="Node2D" parent="PlayerUI" unique_id=1778028930]
+position = Vector2(-898, 472)
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerUI/Bars" unique_id=2060362572]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HpBar" type="ProgressBar" parent="PlayerUI/Bars/CenterContainer" unique_id=1301297600]
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 2
+show_percentage = false
+
+[node name="Label" type="Label" parent="PlayerUI/Bars/CenterContainer" unique_id=325174753]
+layout_mode = 2

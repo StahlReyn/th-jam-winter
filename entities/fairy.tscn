@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c1dw26tpqrm6q"]
+
+[ext_resource type="Script" uid="uid://bj7e1wqn4spo8" path="res://entities/enemy.gd" id="1_im3hm"]
+[ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="2_2ffoj"]
+[ext_resource type="Script" uid="uid://caos6r8xbrfox" path="res://behaviors/behavior_shoot.gd" id="3_to0mx"]
+
+[sub_resource type="Gradient" id="Gradient_2ffoj"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_to0mx"]
+gradient = SubResource("Gradient_2ffoj")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
+radius = 32.0
+
+[node name="Fairy" type="Area2D" unique_id=495896401]
+script = ExtResource("1_im3hm")
+metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1736092231]
+texture = SubResource("GradientTexture2D_to0mx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397573921]
+shape = SubResource("CircleShape2D_im3hm")
+
+[node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("enemy")]
+script = ExtResource("2_2ffoj")
+move_speed = 200.0
+enemy = NodePath("..")
+metadata/_custom_type_script = "uid://c0efxniyajt0p"
+
+[node name="BehaviorShoot" type="Node" parent="." unique_id=98492819 node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_to0mx")
+enemy = NodePath("..")
+metadata/_custom_type_script = "uid://caos6r8xbrfox"

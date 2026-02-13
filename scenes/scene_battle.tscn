@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cdewdwgn4osuf"]
+
+[ext_resource type="Script" uid="uid://brwhj6bphusm8" path="res://scenes/scene_battle.gd" id="1_0lckg"]
+[ext_resource type="PackedScene" uid="uid://c0yrlcqoqkhks" path="res://entities/player.tscn" id="1_v1i1e"]
+[ext_resource type="PackedScene" uid="uid://c1dw26tpqrm6q" path="res://entities/fairy.tscn" id="2_6pv7i"]
+[ext_resource type="Texture2D" uid="uid://ddi6h1gia6thh" path="res://assets/img/bg_nameless.png" id="2_ehaqs"]
+[ext_resource type="PackedScene" uid="uid://cv51hdonthxaq" path="res://scenes/game_camera.tscn" id="5_fpdu6"]
+
+[node name="SceneBattle" type="Node2D" unique_id=1447413065]
+script = ExtResource("1_0lckg")
+
+[node name="Player" parent="." unique_id=2137173324 instance=ExtResource("1_v1i1e")]
+
+[node name="Fairy" parent="." unique_id=495896401 instance=ExtResource("2_6pv7i")]
+position = Vector2(459, -88)
+
+[node name="BgNameless" type="Sprite2D" parent="." unique_id=1524410803]
+z_index = -100
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_ehaqs")
+metadata/_edit_lock_ = true
+
+[node name="GameCamera" parent="." unique_id=720590421 node_paths=PackedStringArray("follow_node") instance=ExtResource("5_fpdu6")]
+follow_node = NodePath("../Player")
