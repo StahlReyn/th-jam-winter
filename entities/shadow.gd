@@ -1,12 +1,12 @@
+class_name ShadowSprite
 extends Sprite2D
 
 @export var main_sprite: Node2D
+@export var base_width: float = 1.0
+@export var mult_width: float = 0.015
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	scale.x = max((70 + main_sprite.position.y) / 70, 0)
+	pass
+	
+func _physics_process(delta: float) -> void:
+	scale.x = max(base_width + main_sprite.position.y * mult_width, 0)

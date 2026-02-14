@@ -4,16 +4,29 @@
 [ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="2_2ffoj"]
 [ext_resource type="Texture2D" uid="uid://bfp1s0uos383f" path="res://assets/img/fairy.png" id="2_ro4sr"]
 [ext_resource type="Script" uid="uid://caos6r8xbrfox" path="res://behaviors/behavior_shoot.gd" id="3_to0mx"]
+[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="5_dfg2a"]
+[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="6_ji4v7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro4sr"]
+atlas = ExtResource("2_ro4sr")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rw6p"]
+atlas = ExtResource("2_ro4sr")
+region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2rw6p"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ro4sr")
+"texture": SubResource("AtlasTexture_ro4sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rw6p")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
@@ -25,12 +38,15 @@ metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
 sprite_frames = SubResource("SpriteFrames_2rw6p")
+frame = 1
+frame_progress = 0.8707201
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397573921]
 shape = SubResource("CircleShape2D_im3hm")
 
-[node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("enemy")]
+[node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "enemy")]
 script = ExtResource("2_2ffoj")
+main_sprite = NodePath("../AnimatedSprite2D")
 move_speed = 200.0
 enemy = NodePath("..")
 metadata/_custom_type_script = "uid://c0efxniyajt0p"
@@ -39,3 +55,12 @@ metadata/_custom_type_script = "uid://c0efxniyajt0p"
 script = ExtResource("3_to0mx")
 enemy = NodePath("..")
 metadata/_custom_type_script = "uid://caos6r8xbrfox"
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=46068130 node_paths=PackedStringArray("main_sprite")]
+self_modulate = Color(1, 1, 1, 0.2627451)
+z_index = -1
+position = Vector2(0, 90)
+texture = ExtResource("5_dfg2a")
+script = ExtResource("6_ji4v7")
+main_sprite = NodePath("../AnimatedSprite2D")
+base_width = 0.7

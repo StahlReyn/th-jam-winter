@@ -1,15 +1,30 @@
 class_name BehaviorMove
 extends EnemyBehavior
 
+@export var main_sprite: AnimatedSprite2D
 @export var move_speed: float = 100
 
-# Called when the node enters the scene tree for the first time.
+var flip_tween: Tween = create_tween()
+var is_flipped: bool = false
+
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var player: Player = Game.get_player()
 	var dir: Vector2 = enemy.position.direction_to(player.position)
 	enemy.position += dir * move_speed * delta
+	
+	main_sprite.play("default")
+	if dir.x > 0 and is_flipped: # right but was left
+		flip_tween.stop()
+		flip_tween = create_tween()
+		flip_tween.tween_property(main_sprite, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_SINE)
+		flip_tween.play()
+		is_flipped = false
+	if dir.x < 0 and not is_flipped: # left but was right
+		flip_tween.stop()
+		flip_tween = create_tween()
+		flip_tween.tween_property(main_sprite, "scale", Vector2(-1,1), 0.2).set_trans(Tween.TRANS_SINE)
+		flip_tween.play()
+		is_flipped = true

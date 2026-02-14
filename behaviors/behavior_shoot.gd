@@ -5,7 +5,7 @@ extends EnemyBehavior
 
 var countdown: float = 0.0
 
-var bullet_scene: PackedScene = preload("res://entities/bullets/circle_bordered.tscn")
+var bullet_scene: PackedScene = preload("res://entities/bullets/bullet_small.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -13,7 +13,8 @@ config_version=5
 config/name="th-jam-winter"
 run/main_scene="uid://cdewdwgn4osuf"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dgsmsmch6aq5q"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
