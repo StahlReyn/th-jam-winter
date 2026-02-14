@@ -2,12 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bj7e1wqn4spo8" path="res://entities/enemy.gd" id="1_im3hm"]
 [ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="2_2ffoj"]
+[ext_resource type="Texture2D" uid="uid://bfp1s0uos383f" path="res://assets/img/fairy.png" id="2_ro4sr"]
 [ext_resource type="Script" uid="uid://caos6r8xbrfox" path="res://behaviors/behavior_shoot.gd" id="3_to0mx"]
 
-[sub_resource type="Gradient" id="Gradient_2ffoj"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_to0mx"]
-gradient = SubResource("Gradient_2ffoj")
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rw6p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ro4sr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
 radius = 32.0
@@ -16,8 +23,8 @@ radius = 32.0
 script = ExtResource("1_im3hm")
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1736092231]
-texture = SubResource("GradientTexture2D_to0mx")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
+sprite_frames = SubResource("SpriteFrames_2rw6p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397573921]
 shape = SubResource("CircleShape2D_im3hm")

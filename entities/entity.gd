@@ -1,8 +1,10 @@
 class_name Entity
 extends Area2D
 
-var hp: int = 100
-@export var mhp: int = 100
+signal took_damage(amount: int)
+
+var hp: int = 10
+@export var mhp: int = 10
 
 const COL_PLAYER: int = 1 << 0
 const COL_ENEMY: int = 1 << 1
@@ -17,3 +19,4 @@ func _process(delta: float) -> void:
 func take_damage(amount: int) -> void:
 	hp -= amount
 	hp = max(hp, 0)
+	took_damage.emit(amount)

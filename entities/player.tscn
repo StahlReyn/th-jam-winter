@@ -1,25 +1,63 @@
 [gd_scene format=3 uid="uid://c0yrlcqoqkhks"]
 
 [ext_resource type="Script" uid="uid://ds2tmf81abehi" path="res://entities/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://dqcptlv48q04t" path="res://assets/img/player_letty.png" id="2_b0kkn"]
+[ext_resource type="Texture2D" uid="uid://bxf5dni44fo83" path="res://assets/img/focus_dot.png" id="3_rfe5m"]
+[ext_resource type="Texture2D" uid="uid://bd8x1qjny8fnu" path="res://assets/img/graze_circle.png" id="4_qly61"]
+[ext_resource type="Script" uid="uid://2f18j5r4p2di" path="res://entities/player_movement.gd" id="5_qly61"]
+[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="6_qsoyl"]
+[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="7_6nm46"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qhqgy"]
-size = Vector2(64, 64)
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b0kkn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_merdl"]
-radius = 32.0
+radius = 16.0
 
 [node name="Player" type="Area2D" unique_id=1013298487 groups=["player"]]
+texture_filter = 1
 script = ExtResource("1_3vyb7")
-move_speed = 2000.0
 metadata/_custom_type_script = "uid://ds2tmf81abehi"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1928569927]
 sprite_frames = SubResource("SpriteFrames_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1129367238]
-texture = SubResource("PlaceholderTexture2D_qhqgy")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1700802354]
 shape = SubResource("CircleShape2D_merdl")
+
+[node name="FocusDot" type="Sprite2D" parent="." unique_id=653262866]
+z_index = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_rfe5m")
+
+[node name="GrazeCircle" type="Sprite2D" parent="." unique_id=549170229]
+z_index = 1
+scale = Vector2(3, 3)
+texture = ExtResource("4_qly61")
+
+[node name="PlayerMovement" type="Node" parent="." unique_id=1118973317 node_paths=PackedStringArray("player", "player_sprite", "focus_sprite", "graze_sprite")]
+script = ExtResource("5_qly61")
+player = NodePath("..")
+speed = 800
+focus_speed = 400
+player_sprite = NodePath("../AnimatedSprite2D")
+focus_sprite = NodePath("../FocusDot")
+graze_sprite = NodePath("../GrazeCircle")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=559256263 node_paths=PackedStringArray("main_sprite")]
+self_modulate = Color(1, 1, 1, 0.2627451)
+z_index = -1
+position = Vector2(0, 90)
+texture = ExtResource("6_qsoyl")
+script = ExtResource("7_6nm46")
+main_sprite = NodePath("../AnimatedSprite2D")
+
+[connection signal="took_damage" from="." to="PlayerMovement" method="_on_player_took_damage"]

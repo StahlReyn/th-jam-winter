@@ -18,4 +18,4 @@ func _process(delta: float) -> void:
 	hp_bar_label.text = str(player.hp) + " / " + str(player.mhp)
 
 func _on_coverage_timer_timeout() -> void:
-	coverage_label.text = str(Game.get_coverage_ratio())
+	coverage_label.text = "Snow: " + "%.2f" % (Game.get_coverage_ratio() * 100) + "%"
