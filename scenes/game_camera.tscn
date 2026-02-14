@@ -24,3 +24,16 @@ show_percentage = false
 
 [node name="Label" type="Label" parent="PlayerUI/Bars/CenterContainer" unique_id=325174753]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerUI/Bars" unique_id=1968875139]
+offset_left = 1.0
+offset_top = -55.0
+offset_right = 41.0
+offset_bottom = -32.0
+text = "AAAAAAA"
+
+[node name="CoverageTimer" type="Timer" parent="PlayerUI" unique_id=650960869]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="PlayerUI/CoverageTimer" to="PlayerUI" method="_on_coverage_timer_timeout"]

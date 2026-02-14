@@ -4,7 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://c0yrlcqoqkhks" path="res://entities/player.tscn" id="1_v1i1e"]
 [ext_resource type="PackedScene" uid="uid://c1dw26tpqrm6q" path="res://entities/fairy.tscn" id="2_6pv7i"]
 [ext_resource type="Texture2D" uid="uid://ddi6h1gia6thh" path="res://assets/img/bg_nameless.png" id="2_ehaqs"]
+[ext_resource type="Script" uid="uid://bnerqth6yt4qj" path="res://scenes/game_map.gd" id="5_0r0km"]
 [ext_resource type="PackedScene" uid="uid://cv51hdonthxaq" path="res://scenes/game_camera.tscn" id="5_fpdu6"]
+[ext_resource type="Script" uid="uid://bhjeh7l1rposv" path="res://scenes/brush.gd" id="6_70o65"]
+[ext_resource type="Texture2D" uid="uid://xdfhn3d3hjwb" path="res://assets/img/snow.png" id="6_e7kjp"]
+[ext_resource type="Script" uid="uid://ylx35lqj7fdq" path="res://scenes/draw_viewport.gd" id="6_is3ya"]
+[ext_resource type="Texture2D" uid="uid://b4xeeo7ajqrvp" path="res://assets/img/brush_snow.png" id="8_pxl38"]
+[ext_resource type="Texture2D" uid="uid://c038ay8xmnjuj" path="res://assets/img/brush_snow_2.png" id="10_qga8c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qga8c"]
+blend_mode = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qga8c"]
+viewport_path = NodePath("GameMap/DrawViewport")
 
 [node name="SceneBattle" type="Node2D" unique_id=1447413065]
 script = ExtResource("1_0lckg")
@@ -14,12 +26,43 @@ script = ExtResource("1_0lckg")
 [node name="Fairy" parent="." unique_id=495896401 instance=ExtResource("2_6pv7i")]
 position = Vector2(459, -88)
 
-[node name="BgNameless" type="Sprite2D" parent="." unique_id=1524410803]
+[node name="GameCamera" parent="." unique_id=720590421 node_paths=PackedStringArray("follow_node") instance=ExtResource("5_fpdu6")]
+follow_node = NodePath("../Player")
+
+[node name="GameMap" type="Node2D" parent="." unique_id=632482707]
 z_index = -100
+script = ExtResource("5_0r0km")
+
+[node name="BgNameless" type="Sprite2D" parent="GameMap" unique_id=1524410803]
+z_index = -10
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("2_ehaqs")
 metadata/_edit_lock_ = true
 
-[node name="GameCamera" parent="." unique_id=720590421 node_paths=PackedStringArray("follow_node") instance=ExtResource("5_fpdu6")]
-follow_node = NodePath("../Player")
+[node name="SnowDraw" type="Sprite2D" parent="GameMap" unique_id=209862275]
+z_index = 10
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_qga8c")
+scale = Vector2(4, 4)
+texture = SubResource("ViewportTexture_qga8c")
+
+[node name="DrawViewport" type="SubViewport" parent="GameMap" unique_id=1415508788]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+script = ExtResource("6_is3ya")
+
+[node name="Brush" type="Node2D" parent="GameMap/DrawViewport" unique_id=1524542763]
+z_index = 2
+script = ExtResource("6_70o65")
+textures = Array[Texture2D]([ExtResource("8_pxl38"), ExtResource("10_qga8c")])
+
+[node name="Snow" type="Sprite2D" parent="GameMap" unique_id=467511572]
+visible = false
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("6_e7kjp")
+centered = false

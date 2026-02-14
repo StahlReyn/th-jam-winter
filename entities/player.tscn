@@ -12,6 +12,7 @@ radius = 32.0
 
 [node name="Player" type="Area2D" unique_id=1013298487 groups=["player"]]
 script = ExtResource("1_3vyb7")
+move_speed = 2000.0
 metadata/_custom_type_script = "uid://ds2tmf81abehi"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1928569927]
