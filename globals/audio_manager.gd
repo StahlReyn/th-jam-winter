@@ -1,0 +1,61 @@
+extends Node
+
+@onready var audio_hit: AudioStreamPlayer = $Hit
+@onready var audio_graze: AudioStreamPlayer = $Graze
+@onready var audio_item_get: AudioStreamPlayer = $ItemGet
+@onready var audio_spellcard: AudioStreamPlayer = $Spellcard
+@onready var audio_select: AudioStreamPlayer = $Select
+@onready var audio_move_select: AudioStreamPlayer = $MoveSelect
+@onready var audio_shoot1: AudioStreamPlayer = $Shoot1
+@onready var audio_shoot_soft: AudioStreamPlayer = $ShootSoft
+@onready var audio_block: AudioStreamPlayer = $Block
+@onready var audio_collect: AudioStreamPlayer = $Collect
+
+func play_audio(sound: AudioStream, volume = 0.0) -> void:
+	var node = AudioStreamPlayer.new()
+	node.stream = sound
+	node.volume_db = volume
+	add_child(node)
+	node.play()
+	await node.finished
+	node.call_deferred("queue_free")
+	
+func play_audio_2d(sound: AudioStream, pos: Vector2, volume = 0.0) -> void:
+	var node = AudioStreamPlayer2D.new()
+	node.position = pos
+	node.stream = sound
+	node.volume_db = volume
+	add_child(node)
+	node.play()
+	await node.finished
+	node.call_deferred("queue_free")
+
+func play_hit() -> void:
+	audio_hit.play()
+
+func play_graze() -> void:
+	audio_graze.play()
+
+func play_item_get() -> void:
+	audio_item_get.play()
+
+func play_spellcard() -> void:
+	audio_spellcard.play()
+
+func play_select() -> void:
+	audio_select.play()
+
+func play_move_select() -> void:
+	audio_move_select.play()
+
+func play_shoot1() -> void:
+	audio_shoot1.play()
+
+func play_shoot_soft() -> void:
+	audio_shoot_soft.play()
+
+func play_block() -> void:
+	audio_block.play()
+
+func play_collect() -> void:
+	audio_collect.play()

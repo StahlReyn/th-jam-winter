@@ -1,14 +1,12 @@
 extends Node
 
 var player: Player
+var graze: int = 0
 
-var map_size: Vector2 = Vector2(4096, 4096)
-var map_halfsize: Vector2 = map_size / 2
+const map_size: Vector2 = Vector2(4096, 4096)
+const map_halfsize: Vector2 = map_size / 2
 
 func _ready() -> void:
-	pass
-
-func _process(delta: float) -> void:
 	pass
 
 func set_player(player: Player) -> void:

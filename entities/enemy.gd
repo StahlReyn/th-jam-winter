@@ -2,9 +2,9 @@ class_name Enemy
 extends Entity
 
 func _ready() -> void:
-	super()
 	collision_layer = COL_ENEMY
 	collision_mask = COL_ENEMY
+	super()
 
 func _physics_process(delta: float) -> void:
 	# Evil O(n^2)

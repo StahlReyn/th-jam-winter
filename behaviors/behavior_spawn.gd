@@ -5,6 +5,8 @@ extends EntityBehavior
 
 func _on_entity_spawn() -> void:
 	entity.is_active = false
+	var prev_col = entity.collision_layer
+	entity.collision_layer = 0
 	var target_pos: Vector2 = main_sprite.position
 	main_sprite.position.y -= 1000
 	var target_mod: Color = main_sprite.modulate
@@ -17,4 +19,5 @@ func _on_entity_spawn() -> void:
 	flip_tween.tween_property(main_sprite, "scale", Vector2(-1,1), 0.2)
 	flip_tween.tween_property(main_sprite, "scale", Vector2(1,1), 0.2)
 	flip_tween.tween_property(entity, "is_active", true, 0.0)
+	flip_tween.tween_property(entity, "collision_layer", prev_col, 0.0)
 	flip_tween.play()

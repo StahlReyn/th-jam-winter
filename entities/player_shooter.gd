@@ -44,6 +44,7 @@ func _physics_process(delta: float) -> void:
 				angle += (i - shoot_amount/2) * spread
 				bullet.rotation = angle
 				bullet.velocity = Vector2.from_angle(angle) * bullet_speed
+			AudioManager.play_shoot1()
 	else:
 		shoot_arrow.modulate.a = MathUtils.lerp_smooth(
 			shoot_arrow.modulate.a, 0.0, 20, delta

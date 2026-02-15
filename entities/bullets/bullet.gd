@@ -9,9 +9,10 @@ extends Entity
 var despawn_size: Vector2 = Game.map_halfsize + Vector2(64,64)
 
 func _ready() -> void:
-	super()
 	collision_layer = COL_BULLET
 	collision_mask = COL_PLAYER
+	super()
+	z_index = 10
 	spawn_anim()
 
 func _process(delta: float) -> void:
@@ -35,4 +36,8 @@ func set_color(color: Color):
 func _on_area_entered(area: Area2D) -> void:
 	if area is Entity:
 		area.take_damage(damage)
+		AudioManager.play_hit()
 		despawn()
+	elif area is GrazeArea:
+		Game.graze += 1
+		AudioManager.play_graze()

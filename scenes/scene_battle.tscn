@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ylx35lqj7fdq" path="res://scenes/draw_viewport.gd" id="6_is3ya"]
 [ext_resource type="Texture2D" uid="uid://b4xeeo7ajqrvp" path="res://assets/img/brush_snow.png" id="8_pxl38"]
 [ext_resource type="Texture2D" uid="uid://c038ay8xmnjuj" path="res://assets/img/brush_snow_2.png" id="10_qga8c"]
+[ext_resource type="AudioStream" uid="uid://cxopu8d64u03h" path="res://assets/audio/bgm/hifuu_spring.ogg" id="12_jmar4"]
 [ext_resource type="Script" uid="uid://b5ck8arntrlgj" path="res://scenes/stage_handler.gd" id="12_tfcxk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qga8c"]
@@ -72,3 +73,8 @@ metadata/_edit_lock_ = true
 
 [node name="StageHandler" type="Node" parent="." unique_id=1566043013]
 script = ExtResource("12_tfcxk")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=12709723]
+stream = ExtResource("12_jmar4")
+volume_db = -8.0
+autoplay = true
