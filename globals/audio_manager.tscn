@@ -21,7 +21,7 @@ bus = &"sfx"
 
 [node name="Graze" type="AudioStreamPlayer" parent="." unique_id=1477207366]
 stream = ExtResource("5_8ak76")
-volume_db = -10.0
+volume_db = -15.0
 max_polyphony = 2
 bus = &"sfx"
 

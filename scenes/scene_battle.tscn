@@ -78,3 +78,4 @@ script = ExtResource("12_tfcxk")
 stream = ExtResource("12_jmar4")
 volume_db = -8.0
 autoplay = true
+parameters/looping = true

@@ -28,13 +28,13 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	rng.seed = 1234
 	
-	player_bounce_tween = create_tween().set_loops()
-	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,-20), bounce_time).set_trans(Tween.TRANS_SINE)
-	player_bounce_tween.parallel().tween_property(player_sprite, "rotation", 0.2, bounce_time*2).set_trans(Tween.TRANS_SINE)
-	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,0), bounce_time).set_trans(Tween.TRANS_SINE)
-	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,-20), bounce_time).set_trans(Tween.TRANS_SINE)
-	player_bounce_tween.parallel().tween_property(player_sprite, "rotation", -0.2, bounce_time*2).set_trans(Tween.TRANS_SINE)
-	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,0), bounce_time).set_trans(Tween.TRANS_SINE)
+	player_bounce_tween = create_tween().set_loops().set_trans(Tween.TRANS_SINE)
+	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,-20), bounce_time)
+	player_bounce_tween.parallel().tween_property(player_sprite, "rotation", 0.2, bounce_time*2)
+	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,0), bounce_time)
+	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,-20), bounce_time)
+	player_bounce_tween.parallel().tween_property(player_sprite, "rotation", -0.2, bounce_time*2)
+	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,0), bounce_time)
 	player_bounce_tween.stop()
 	
 func _physics_process(delta: float) -> void:
@@ -45,9 +45,9 @@ func _physics_process(delta: float) -> void:
 			player_bounce_tween.play()
 		else:
 			player_bounce_tween.stop()
-			var reset_tween: Tween = create_tween()
-			reset_tween.tween_property(player_sprite, "position", Vector2(0,0), bounce_time).set_trans(Tween.TRANS_SINE)
-			reset_tween.parallel().tween_property(player_sprite, "rotation", 0.0, bounce_time).set_trans(Tween.TRANS_SINE)
+			var reset_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
+			reset_tween.tween_property(player_sprite, "position", Vector2(0,0), bounce_time)
+			reset_tween.parallel().tween_property(player_sprite, "rotation", 0.0, bounce_time)
 			reset_tween.play()
 
 func get_speed() -> int:
@@ -59,12 +59,12 @@ func process_movement(delta: float) -> void:
 	var dir: Vector2 = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		dir.x += 1
-		var flip_tween: Tween = create_tween()
-		flip_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.1).set_trans(Tween.TRANS_SINE)
+		var flip_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
+		flip_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.1)
 	if Input.is_action_pressed("ui_left"):
 		dir.x += -1
-		var flip_tween: Tween = create_tween()
-		flip_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.1).set_trans(Tween.TRANS_SINE)
+		var flip_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE)
+		flip_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.1)
 	if Input.is_action_pressed("ui_down"):
 		dir.y += 1
 	if Input.is_action_pressed("ui_up"):

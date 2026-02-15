@@ -2,6 +2,7 @@ class_name StageHandler
 extends Node
 
 const ENEMY_FAIRY: PackedScene = preload("res://entities/enemies/fairy.tscn")
+const ENEMY_FAIRY_SUNFLOWER: PackedScene = preload("res://entities/enemies/fairy_sunflower.tscn")
 
 var scene_battle: SceneBattle
 
@@ -22,7 +23,10 @@ func test_wave() -> void:
 		var cluster_pos = Game.get_player().position
 		cluster_pos += Vector2.from_angle(rng.randf_range(0, TAU)) * spawn_spread
 		for i in range(8):
-			var enemy: Enemy = scene_battle.spawn_enemy(ENEMY_FAIRY)
+			var scene := ENEMY_FAIRY
+			if i % 4 == 0:
+				scene = ENEMY_FAIRY_SUNFLOWER
+			var enemy: Enemy = scene_battle.spawn_enemy(scene)
 			enemy.position = cluster_pos + Vector2(
 				rng.randfn(0, spread), 
 				rng.randfn(0, spread)

@@ -89,6 +89,7 @@ collision_mask = 0
 script = ExtResource("11_x08pd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrazeArea" unique_id=229102977]
+position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_x08pd")
 
 [connection signal="took_damage" from="." to="BehaviorHurt" method="_on_entity_took_damage"]

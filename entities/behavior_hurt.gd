@@ -3,9 +3,9 @@ extends EntityBehavior
 
 @export var main_sprite: AnimatedSprite2D
 @export var rotate_time: float = 0.1
-@export var rotate_amount: float = 0.3
+@export var rotate_amount: float = 0.2
 
-func _on_entity_took_damage(amount: int) -> void:
+func _on_entity_took_damage(_amount: int) -> void:
 	var hurt_tween: Tween = create_tween()
 	main_sprite.modulate = Color.PALE_VIOLET_RED
 	hurt_tween.tween_property(main_sprite, "rotation", rotate_amount, rotate_time * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
