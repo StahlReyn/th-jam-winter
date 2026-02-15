@@ -17,18 +17,34 @@ func set_player(player: Player) -> void:
 func get_player() -> Player:
 	return player
 
+# Spawning
+func spawn_bullet_enemy(bullet_scene: PackedScene, color: Color = Color.WHITE) -> Bullet:
+	var scene: SceneBattle = get_tree().current_scene
+	var bullet: Bullet = scene.spawn_bullet(bullet_scene)
+	bullet.set_color(color)
+	bullet.collision_mask = Entity.COL_PLAYER
+	return bullet
+
+func spawn_bullet_player(bullet_scene: PackedScene, color: Color = Color.WHITE) -> Bullet:
+	var scene: SceneBattle = get_tree().current_scene
+	var bullet: Bullet = scene.spawn_bullet(bullet_scene)
+	bullet.set_color(color)
+	bullet.collision_mask = Entity.COL_ENEMY
+	return bullet
+
+# Paints
 func get_coverage_ratio() -> float:
-	var scene_battle: SceneBattle = get_tree().current_scene
-	return scene_battle.game_map.get_coverage_ratio()
+	var scene: SceneBattle = get_tree().current_scene
+	return scene.game_map.get_coverage_ratio()
 
 func get_game_map() -> GameMap:
-	var scene_battle: SceneBattle = get_tree().current_scene
-	return scene_battle.game_map
+	var scene: SceneBattle = get_tree().current_scene
+	return scene.game_map
 
 func paint_map(position: Vector2) -> void:
-	var scene_battle: SceneBattle = get_tree().current_scene
-	scene_battle.game_map.paint_global(position)
+	var scene: SceneBattle = get_tree().current_scene
+	scene.game_map.paint_global(position)
 
 func set_paint_brush_size(brush_size: int) -> void:
-	var scene_battle: SceneBattle = get_tree().current_scene
-	scene_battle.game_map.set_brush_size(brush_size)
+	var scene: SceneBattle = get_tree().current_scene
+	scene.game_map.set_brush_size(brush_size)

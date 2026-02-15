@@ -7,18 +7,16 @@ var countdown: float = 0.0
 
 var bullet_scene: PackedScene = preload("res://entities/bullets/bullet_small.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	countdown = cooldown
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if enemy.is_dead:
+		return
 	countdown -= delta
 	
 	while countdown < 0:
-		# Should not be spawning bullets outside anyways
-		var scene: SceneBattle = get_tree().current_scene
-		var bullet = scene.spawn_bullet(bullet_scene)
+		var bullet = Game.spawn_bullet_enemy(bullet_scene, Color.RED)
 		bullet.global_position = enemy.global_position
 		
 		var player: Player = Game.get_player()

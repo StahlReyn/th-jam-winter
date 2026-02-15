@@ -11,6 +11,9 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if enemy.is_dead:
+		return
+		
 	var player: Player = Game.get_player()
 	var dir: Vector2 = enemy.position.direction_to(player.position)
 	enemy.position += dir * move_speed * delta
@@ -28,3 +31,7 @@ func _physics_process(delta: float) -> void:
 		flip_tween.tween_property(main_sprite, "scale", Vector2(-1,1), 0.2).set_trans(Tween.TRANS_SINE)
 		flip_tween.play()
 		is_flipped = true
+
+
+func _on_enemy_died() -> void:
+	flip_tween.stop()

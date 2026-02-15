@@ -9,6 +9,7 @@ extends Node
 @export var graze_sprite: Sprite2D
 
 var velocity: Vector2 = Vector2.ZERO
+
 var graze_rotation_speed: float = 1
 var focus_anim_speed: float = 20
 var focused_scale: Vector2 = Vector2.ONE * 3
@@ -55,34 +56,28 @@ func get_speed() -> int:
 	return speed
 
 func process_movement(delta: float) -> void:
-	velocity = Vector2.ZERO
+	var dir: Vector2 = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
+		dir.x += 1
 		var flip_tween: Tween = create_tween()
 		flip_tween.tween_property(player_sprite, "scale", Vector2(1, 1), 0.1).set_trans(Tween.TRANS_SINE)
 	if Input.is_action_pressed("ui_left"):
-		velocity.x += -1
+		dir.x += -1
 		var flip_tween: Tween = create_tween()
 		flip_tween.tween_property(player_sprite, "scale", Vector2(-1, 1), 0.1).set_trans(Tween.TRANS_SINE)
 	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
+		dir.y += 1
 	if Input.is_action_pressed("ui_up"):
-		velocity.y += -1
-	velocity = velocity.normalized()
+		dir.y += -1
+	dir = dir.normalized()
 	
-	if velocity == Vector2.ZERO:
+	if dir == Vector2.ZERO:
 		is_moving = false
 	else:
 		is_moving = true
-		player.position += velocity * get_speed() * delta
+		velocity = dir * get_speed()
+		player.position += velocity * delta
 		player.position = player.position.clamp(-Game.map_halfsize, Game.map_halfsize)
-	
-	#if velocity.x < 0: 
-		#player_sprite.play("left")
-	#elif velocity.x > 0:
-		#player_sprite.play("right")
-	#else:
-		#player_sprite.play("default")
 	
 	if velocity != Vector2.ZERO:
 		Game.set_paint_brush_size(70)

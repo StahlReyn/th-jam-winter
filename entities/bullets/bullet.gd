@@ -27,12 +27,9 @@ func spawn_anim() -> void:
 	main_sprite.modulate.a = 0
 	spawn_tween.tween_property(main_sprite, "scale", orig_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	spawn_tween.tween_property(main_sprite, "modulate", orig_modulate, 0.2)
-	
-func despawn() -> void:
-	call_deferred("queue_free")
 
 func set_color(color: Color):
-	material.set_shader_parameter("blend", color)
+	main_sprite.material.set_shader_parameter("blend", color)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Entity:

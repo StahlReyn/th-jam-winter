@@ -76,4 +76,10 @@ metadata/_edit_lock_ = true
 position = Vector2(1040, -849)
 
 [node name="Fairy3" parent="." unique_id=1205522168 instance=ExtResource("2_6pv7i")]
-position = Vector2(1691, 104)
+position = Vector2(1648, 271)
+
+[node name="Fairy4" parent="." unique_id=321634744 instance=ExtResource("2_6pv7i")]
+position = Vector2(1162, 651)
+
+[node name="Fairy5" parent="." unique_id=647631894 instance=ExtResource("2_6pv7i")]
+position = Vector2(1872, 593)

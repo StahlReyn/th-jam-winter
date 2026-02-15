@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://2f18j5r4p2di" path="res://entities/player_movement.gd" id="5_qly61"]
 [ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="6_qsoyl"]
 [ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="7_6nm46"]
+[ext_resource type="Script" uid="uid://fac3in6ro2i7" path="res://entities/player_shooter.gd" id="8_i623q"]
+[ext_resource type="Texture2D" uid="uid://blulpnvflgawy" path="res://assets/img/shoot_arrow.png" id="9_ef06p"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
@@ -43,6 +45,14 @@ z_index = 1
 scale = Vector2(3, 3)
 texture = ExtResource("4_qly61")
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=559256263 node_paths=PackedStringArray("main_sprite")]
+self_modulate = Color(1, 1, 1, 0.2627451)
+z_index = -1
+position = Vector2(0, 90)
+texture = ExtResource("6_qsoyl")
+script = ExtResource("7_6nm46")
+main_sprite = NodePath("../AnimatedSprite2D")
+
 [node name="PlayerMovement" type="Node" parent="." unique_id=1118973317 node_paths=PackedStringArray("player", "player_sprite", "focus_sprite", "graze_sprite")]
 script = ExtResource("5_qly61")
 player = NodePath("..")
@@ -52,12 +62,16 @@ player_sprite = NodePath("../AnimatedSprite2D")
 focus_sprite = NodePath("../FocusDot")
 graze_sprite = NodePath("../GrazeCircle")
 
-[node name="Shadow" type="Sprite2D" parent="." unique_id=559256263 node_paths=PackedStringArray("main_sprite")]
-self_modulate = Color(1, 1, 1, 0.2627451)
-z_index = -1
-position = Vector2(0, 90)
-texture = ExtResource("6_qsoyl")
-script = ExtResource("7_6nm46")
-main_sprite = NodePath("../AnimatedSprite2D")
+[node name="PlayerShooter" type="Node" parent="." unique_id=2109587995 node_paths=PackedStringArray("player", "player_movement", "shoot_arrow")]
+script = ExtResource("8_i623q")
+player = NodePath("..")
+player_movement = NodePath("../PlayerMovement")
+shoot_arrow = NodePath("../ShootArrow")
+
+[node name="ShootArrow" type="Sprite2D" parent="." unique_id=1865814513]
+self_modulate = Color(1, 1, 1, 0.27058825)
+z_index = 2
+texture = ExtResource("9_ef06p")
+offset = Vector2(80, 0)
 
 [connection signal="took_damage" from="." to="PlayerMovement" method="_on_player_took_damage"]
