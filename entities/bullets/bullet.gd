@@ -9,6 +9,7 @@ extends Entity
 var despawn_size: Vector2 = Game.map_halfsize + Vector2(64,64)
 
 func _ready() -> void:
+	super()
 	collision_layer = COL_BULLET
 	collision_mask = COL_PLAYER
 	spawn_anim()

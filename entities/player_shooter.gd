@@ -25,18 +25,25 @@ func _physics_process(delta: float) -> void:
 			shoot_arrow.modulate.a, 1.0, 20, delta
 		)
 		if shoot_countdown <= 0:
-			var shoot_amount = 3
-			var bullet_speed = 800
+			shoot_countdown = shoot_cooldown
+			var shoot_amount: int = 5
+			var bullet_speed: float = 1000
+			var spread: float = 0.25
+			var color: Color = Color.AQUA
+			if Input.is_action_pressed("focus"):
+				spread *= 0.2
+				bullet_speed *= 1.5
+				shoot_countdown *= 0.5
+				color = Color.BLUE
 			for i in range(shoot_amount):
-				var bullet = Game.spawn_bullet_player(bullet_scene, Color.AQUA)
+				var bullet = Game.spawn_bullet_player(bullet_scene, color)
 				bullet.global_position = player.global_position
 				
 				var angle: float = shoot_arrow.rotation
 				@warning_ignore("integer_division")
-				angle += (i - shoot_amount/2) * 0.25
+				angle += (i - shoot_amount/2) * spread
 				bullet.rotation = angle
 				bullet.velocity = Vector2.from_angle(angle) * bullet_speed
-			shoot_countdown = shoot_cooldown
 	else:
 		shoot_arrow.modulate.a = MathUtils.lerp_smooth(
 			shoot_arrow.modulate.a, 0.0, 20, delta

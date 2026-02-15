@@ -1,5 +1,5 @@
 class_name BehaviorDeath
-extends EnemyBehavior
+extends EntityBehavior
 
 @export var main_sprite: AnimatedSprite2D
 
@@ -8,12 +8,6 @@ static var grayscale_material: ShaderMaterial = ShaderMaterial.new()
 
 func _init() -> void:
 	grayscale_material.shader = grayscale_shader
-
-func _ready() -> void:
-	pass
-
-func _process(delta: float) -> void:
-	pass
 
 func _on_enemy_died() -> void:
 	main_sprite.material = grayscale_material
@@ -27,4 +21,4 @@ func _on_enemy_died() -> void:
 	target_mod.a = 0
 	flip_tween.tween_property(main_sprite, "position", target_pos, 1.4)
 	flip_tween.parallel().tween_property(main_sprite, "modulate", target_mod, 1.4)
-	flip_tween.tween_callback(enemy.despawn)
+	flip_tween.tween_callback(entity.despawn)

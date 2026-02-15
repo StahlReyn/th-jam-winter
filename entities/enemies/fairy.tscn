@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://c1dw26tpqrm6q"]
+
+[ext_resource type="Script" uid="uid://bj7e1wqn4spo8" path="res://entities/enemy.gd" id="1_gyh76"]
+[ext_resource type="Texture2D" uid="uid://bfp1s0uos383f" path="res://assets/img/fairy.png" id="2_i4ln7"]
+[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="3_7m8qy"]
+[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="4_pqe4b"]
+[ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="5_fpqfm"]
+[ext_resource type="Script" uid="uid://caos6r8xbrfox" path="res://behaviors/behavior_shoot.gd" id="6_5vvfg"]
+[ext_resource type="Script" uid="uid://bt8j5o8i3nqnv" path="res://behaviors/behavior_death.gd" id="7_187dm"]
+[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://entities/behavior_hurt.gd" id="8_jh70n"]
+[ext_resource type="Script" uid="uid://k8874lbn0lpd" path="res://behaviors/behavior_spawn.gd" id="9_i4ln7"]
+[ext_resource type="Script" uid="uid://dxry1e8r1pi6d" path="res://entities/enemies/behavior_float.gd" id="10_7m8qy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro4sr"]
+atlas = ExtResource("2_i4ln7")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rw6p"]
+atlas = ExtResource("2_i4ln7")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rw6p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro4sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rw6p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
+radius = 32.0
+
+[node name="Fairy" type="Area2D" unique_id=495896401]
+script = ExtResource("1_gyh76")
+metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
+sprite_frames = SubResource("SpriteFrames_2rw6p")
+frame = 1
+frame_progress = 0.8707201
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397573921]
+shape = SubResource("CircleShape2D_im3hm")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=46068130 node_paths=PackedStringArray("main_sprite")]
+self_modulate = Color(1, 1, 1, 0.2627451)
+z_index = -1
+position = Vector2(0, 90)
+texture = ExtResource("3_7m8qy")
+script = ExtResource("4_pqe4b")
+main_sprite = NodePath("../AnimatedSprite2D")
+base_width = 0.7
+
+[node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("5_fpqfm")
+main_sprite = NodePath("../AnimatedSprite2D")
+move_speed = 200.0
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://c0efxniyajt0p"
+
+[node name="BehaviorShoot" type="Node" parent="." unique_id=98492819 node_paths=PackedStringArray("entity")]
+script = ExtResource("6_5vvfg")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://caos6r8xbrfox"
+
+[node name="BehaviorDeath" type="Node" parent="." unique_id=1488842329 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("7_187dm")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bt8j5o8i3nqnv"
+
+[node name="BehaviorHurt" type="Node" parent="." unique_id=1665522577 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("8_jh70n")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://b7wcbedd5f40v"
+
+[node name="BehaviorSpawn" type="Node" parent="." unique_id=1676203199 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("9_i4ln7")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://k8874lbn0lpd"
+
+[node name="BehaviorFloat" type="Node" parent="." unique_id=224866739 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("10_7m8qy")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://1ufsnglhqnhe"
+
+[connection signal="died" from="." to="BehaviorDeath" method="_on_enemy_died"]
+[connection signal="died" from="." to="BehaviorFloat" method="_on_enemy_died"]
+[connection signal="spawned" from="." to="BehaviorSpawn" method="_on_entity_spawn"]
+[connection signal="spawned" from="." to="BehaviorFloat" method="_on_enemy_spawned"]
+[connection signal="took_damage" from="." to="BehaviorHurt" method="_on_entity_took_damage"]

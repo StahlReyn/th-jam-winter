@@ -1,5 +1,5 @@
 class_name BehaviorMove
-extends EnemyBehavior
+extends EntityBehavior
 
 @export var main_sprite: AnimatedSprite2D
 @export var move_speed: float = 100
@@ -11,12 +11,13 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if enemy.is_dead:
+	if not entity.is_active:
+		flip_tween.stop()
 		return
 		
 	var player: Player = Game.get_player()
-	var dir: Vector2 = enemy.position.direction_to(player.position)
-	enemy.position += dir * move_speed * delta
+	var dir: Vector2 = entity.position.direction_to(player.position)
+	entity.position += dir * move_speed * delta
 	
 	main_sprite.play("default")
 	if dir.x > 0 and is_flipped: # right but was left
@@ -31,7 +32,3 @@ func _physics_process(delta: float) -> void:
 		flip_tween.tween_property(main_sprite, "scale", Vector2(-1,1), 0.2).set_trans(Tween.TRANS_SINE)
 		flip_tween.play()
 		is_flipped = true
-
-
-func _on_enemy_died() -> void:
-	flip_tween.stop()

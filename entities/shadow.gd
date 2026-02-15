@@ -6,7 +6,7 @@ extends Sprite2D
 @export var mult_width: float = 0.015
 
 func _ready() -> void:
-	pass
+	scale.x = 0.0
 	
 func _physics_process(delta: float) -> void:
-	scale.x = max(base_width + main_sprite.position.y * mult_width, 0)
+	scale.x = clamp(base_width + main_sprite.position.y * mult_width, 0.0, 2.0)

@@ -95,12 +95,3 @@ func process_focus(delta: float) -> void:
 		focus_sprite.scale = MathUtils.lerp_smooth(focus_sprite.scale, unfocused_scale, focus_anim_speed, delta)
 		graze_sprite.modulate.a = MathUtils.lerp_smooth(graze_sprite.modulate.a, unfocused_alpha, focus_anim_speed, delta)
 		graze_sprite.scale = MathUtils.lerp_smooth(graze_sprite.scale, unfocused_scale, focus_anim_speed, delta)
-	
-
-
-func _on_player_took_damage(amount: int) -> void:
-	var hurt_tween: Tween = create_tween()
-	player_sprite.modulate = Color.PALE_VIOLET_RED
-	hurt_tween.tween_property(player_sprite, "rotation", 0.8, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	hurt_tween.parallel().tween_property(player_sprite, "modulate", Color.WHITE, 0.2)
-	hurt_tween.tween_property(player_sprite, "rotation", 0.0, 0.2).set_trans(Tween.TRANS_SINE)

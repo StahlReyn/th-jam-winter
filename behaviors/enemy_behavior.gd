@@ -1,4 +1,4 @@
-class_name EnemyBehavior
+class_name EntityBehavior
 extends Node
 
-@export var enemy: Enemy
+@export var entity: Entity
