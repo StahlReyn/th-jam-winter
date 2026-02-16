@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://h8m05n2fwoef"]
+
+[ext_resource type="FontFile" uid="uid://wqcv5nneer8f" path="res://assets/fonts/Sriracha-Regular.ttf" id="1_okslq"]
+
+[resource]
+font = ExtResource("1_okslq")
+font_size = 95
+font_color = Color(0.67058825, 0, 0, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)

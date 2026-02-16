@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="th-jam-winter"
-run/main_scene="uid://cdewdwgn4osuf"
+run/main_scene="uid://drdmr3f13xee3"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://dgsmsmch6aq5q"
 config/windows_native_icon="res://icon.ico"
@@ -20,6 +20,7 @@ config/windows_native_icon="res://icon.ico"
 
 Game="*uid://q5ws1uoxorbh"
 AudioManager="*uid://bywmnoc5pmm74"
+SceneManager="*uid://b66y324cwmea7"
 
 [display]
 

@@ -1,16 +1,19 @@
 [gd_scene format=3 uid="uid://cdewdwgn4osuf"]
 
 [ext_resource type="Script" uid="uid://brwhj6bphusm8" path="res://scenes/scene_battle.gd" id="1_0lckg"]
-[ext_resource type="PackedScene" uid="uid://c0yrlcqoqkhks" path="res://entities/player.tscn" id="1_v1i1e"]
+[ext_resource type="PackedScene" uid="uid://c0yrlcqoqkhks" path="res://entities/players/player.tscn" id="1_v1i1e"]
 [ext_resource type="Texture2D" uid="uid://ddi6h1gia6thh" path="res://assets/img/bg_nameless.png" id="2_ehaqs"]
+[ext_resource type="Texture2D" uid="uid://bjekbij6p6lja" path="res://assets/img/center_gradient.png" id="4_jmar4"]
 [ext_resource type="Script" uid="uid://bnerqth6yt4qj" path="res://scenes/game_map.gd" id="5_0r0km"]
 [ext_resource type="PackedScene" uid="uid://cv51hdonthxaq" path="res://scenes/game_camera.tscn" id="5_fpdu6"]
+[ext_resource type="LabelSettings" uid="uid://h8m05n2fwoef" path="res://assets/control_themes/label_died.tres" id="5_xn66u"]
 [ext_resource type="Script" uid="uid://bhjeh7l1rposv" path="res://scenes/brush.gd" id="6_70o65"]
 [ext_resource type="Texture2D" uid="uid://xdfhn3d3hjwb" path="res://assets/img/snow.png" id="6_e7kjp"]
 [ext_resource type="Script" uid="uid://ylx35lqj7fdq" path="res://scenes/draw_viewport.gd" id="6_is3ya"]
+[ext_resource type="LabelSettings" uid="uid://34atilf1kb6r" path="res://assets/control_themes/label_main.tres" id="6_tmjjs"]
 [ext_resource type="Texture2D" uid="uid://b4xeeo7ajqrvp" path="res://assets/img/brush_snow.png" id="8_pxl38"]
 [ext_resource type="Texture2D" uid="uid://c038ay8xmnjuj" path="res://assets/img/brush_snow_2.png" id="10_qga8c"]
-[ext_resource type="AudioStream" uid="uid://cxopu8d64u03h" path="res://assets/audio/bgm/hifuu_spring.ogg" id="12_jmar4"]
+[ext_resource type="AudioStream" uid="uid://bjl52jx2w1tqb" path="res://assets/audio/bgm/projectileslop.ogg" id="12_jmar4"]
 [ext_resource type="Script" uid="uid://b5ck8arntrlgj" path="res://scenes/stage_handler.gd" id="12_tfcxk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qga8c"]
@@ -28,6 +31,40 @@ script = ExtResource("1_0lckg")
 [node name="GameCamera" parent="." unique_id=720590421 node_paths=PackedStringArray("follow_node") instance=ExtResource("5_fpdu6")]
 follow_node = NodePath("../Player")
 metadata/_edit_lock_ = true
+
+[node name="CenterGradient" type="Sprite2D" parent="GameCamera" unique_id=389933737]
+texture_filter = 1
+texture = ExtResource("4_jmar4")
+
+[node name="Label" type="Label" parent="GameCamera/CenterGradient" unique_id=1416544201]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -980.0
+offset_top = -251.5
+offset_right = -940.0
+offset_bottom = -228.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU DIED"
+label_settings = ExtResource("5_xn66u")
+
+[node name="Label2" type="Label" parent="GameCamera/CenterGradient" unique_id=795198109]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1103.5
+offset_top = -191.0
+offset_right = -816.5
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press [Z] to Restart"
+label_settings = ExtResource("6_tmjjs")
 
 [node name="GameMap" type="Node2D" parent="." unique_id=632482707]
 z_index = -100
@@ -77,4 +114,7 @@ script = ExtResource("12_tfcxk")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=12709723]
 stream = ExtResource("12_jmar4")
 volume_db = -8.0
+autoplay = true
 parameters/looping = true
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]

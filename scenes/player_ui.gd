@@ -7,17 +7,20 @@ extends Node2D
 
 @export var test_label: Label
 
-func _ready() -> void:
-	pass
+var scene_battle: SceneBattle
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	scene_battle = get_tree().current_scene
+
+func _physics_process(delta: float) -> void:
 	var player: Player = Game.get_player()
 	hp_bar.value = player.hp
 	hp_bar.max_value = player.mhp
 	hp_bar_label.text = str(player.hp) + " / " + str(player.mhp)
 	
 	test_label.text = (
-		"Enemies: " + str(Game.get_alive_enemy_count()) + 
+		"Time: " + "%.2f" % Game.game_time +
+		"\nEnemies: " + str(Game.get_alive_enemy_count()) + 
 		"\nGraze: " + str(Game.graze)
 	)
 

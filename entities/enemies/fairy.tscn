@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="5_fpqfm"]
 [ext_resource type="Script" uid="uid://caos6r8xbrfox" path="res://behaviors/behavior_shoot.gd" id="6_5vvfg"]
 [ext_resource type="Script" uid="uid://bt8j5o8i3nqnv" path="res://behaviors/behavior_death.gd" id="7_187dm"]
-[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://entities/behavior_hurt.gd" id="8_jh70n"]
+[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="8_jh70n"]
 [ext_resource type="Script" uid="uid://k8874lbn0lpd" path="res://behaviors/behavior_spawn.gd" id="9_i4ln7"]
 [ext_resource type="Script" uid="uid://dxry1e8r1pi6d" path="res://behaviors/behavior_float.gd" id="10_7m8qy"]
 

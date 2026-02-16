@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://drdmr3f13xee3"]
+
+[ext_resource type="Script" uid="uid://imjxoem8gnxj" path="res://scenes/scene_main_menu.gd" id="1_tk4wt"]
+[ext_resource type="Texture2D" uid="uid://ssni0ebi0e4f" path="res://assets/img/menu_bg.png" id="1_wqhsr"]
+[ext_resource type="FontFile" uid="uid://wqcv5nneer8f" path="res://assets/fonts/Sriracha-Regular.ttf" id="3_tk4wt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3kjnk"]
+font = ExtResource("3_tk4wt")
+font_size = 64
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SceneMainMenu" type="Node2D" unique_id=131658857]
+script = ExtResource("1_tk4wt")
+
+[node name="MenuBg" type="Sprite2D" parent="." unique_id=1968807103]
+texture = ExtResource("1_wqhsr")
+centered = false
+
+[node name="Start" type="Node2D" parent="." unique_id=1278988694]
+position = Vector2(859, 478)
+
+[node name="Label" type="Label" parent="Start" unique_id=696480921]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Press [Z] to start"
+label_settings = SubResource("LabelSettings_3kjnk")

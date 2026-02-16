@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://c0yrlcqoqkhks"]
+
+[ext_resource type="Script" uid="uid://ds2tmf81abehi" path="res://entities/players/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://dqcptlv48q04t" path="res://assets/img/player_letty.png" id="2_b0kkn"]
+[ext_resource type="Texture2D" uid="uid://bxf5dni44fo83" path="res://assets/img/focus_dot.png" id="3_rfe5m"]
+[ext_resource type="Texture2D" uid="uid://bd8x1qjny8fnu" path="res://assets/img/graze_circle.png" id="4_qly61"]
+[ext_resource type="Script" uid="uid://2f18j5r4p2di" path="res://entities/players/player_movement.gd" id="5_qly61"]
+[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="6_qsoyl"]
+[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="7_6nm46"]
+[ext_resource type="Script" uid="uid://fac3in6ro2i7" path="res://entities/players/player_shooter.gd" id="8_i623q"]
+[ext_resource type="Texture2D" uid="uid://blulpnvflgawy" path="res://assets/img/shoot_arrow.png" id="9_ef06p"]
+[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="10_tjdhl"]
+[ext_resource type="Script" uid="uid://c2fgjew85hiea" path="res://entities/players/graze_area.gd" id="11_x08pd"]
+[ext_resource type="Script" uid="uid://c18yglnabuygt" path="res://behaviors/behavior_death_fall.gd" id="12_4tuy0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b0kkn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_merdl"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x08pd"]
+radius = 96.0
+
+[node name="Player" type="Area2D" unique_id=1013298487 groups=["player"]]
+texture_filter = 1
+collision_mask = 0
+script = ExtResource("1_3vyb7")
+metadata/_custom_type_script = "uid://ds2tmf81abehi"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1928569927]
+sprite_frames = SubResource("SpriteFrames_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1700802354]
+shape = SubResource("CircleShape2D_merdl")
+
+[node name="FocusDot" type="Sprite2D" parent="." unique_id=653262866]
+z_index = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_rfe5m")
+
+[node name="GrazeCircle" type="Sprite2D" parent="." unique_id=549170229]
+z_index = 1
+scale = Vector2(3, 3)
+texture = ExtResource("4_qly61")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=559256263 node_paths=PackedStringArray("main_sprite")]
+self_modulate = Color(1, 1, 1, 0.2627451)
+z_index = -1
+position = Vector2(0, 90)
+texture = ExtResource("6_qsoyl")
+script = ExtResource("7_6nm46")
+main_sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ShootArrow" type="Sprite2D" parent="." unique_id=1865814513]
+self_modulate = Color(1, 1, 1, 0.27058825)
+z_index = 2
+texture = ExtResource("9_ef06p")
+offset = Vector2(80, 0)
+
+[node name="GrazeArea" type="Area2D" parent="." unique_id=1665706378]
+collision_mask = 0
+script = ExtResource("11_x08pd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrazeArea" unique_id=229102977]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_x08pd")
+
+[node name="PlayerMovement" type="Node" parent="." unique_id=1118973317 node_paths=PackedStringArray("player", "player_sprite", "focus_sprite", "graze_sprite")]
+script = ExtResource("5_qly61")
+player = NodePath("..")
+speed = 800
+focus_speed = 400
+player_sprite = NodePath("../AnimatedSprite2D")
+focus_sprite = NodePath("../FocusDot")
+graze_sprite = NodePath("../GrazeCircle")
+
+[node name="PlayerShooter" type="Node" parent="." unique_id=2109587995 node_paths=PackedStringArray("player", "player_movement", "shoot_arrow")]
+script = ExtResource("8_i623q")
+player = NodePath("..")
+player_movement = NodePath("../PlayerMovement")
+shoot_arrow = NodePath("../ShootArrow")
+
+[node name="BehaviorHurt" type="Node" parent="." unique_id=364893681 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("10_tjdhl")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+
+[node name="BehaviorDeathFall" type="Node" parent="." unique_id=525746107 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("12_4tuy0")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://c18yglnabuygt"
+
+[connection signal="died" from="." to="GrazeArea" method="_on_player_died"]
+[connection signal="died" from="." to="PlayerMovement" method="_on_player_died"]
+[connection signal="died" from="." to="BehaviorDeathFall" method="_on_entity_died"]
+[connection signal="took_damage" from="." to="BehaviorHurt" method="_on_entity_took_damage"]

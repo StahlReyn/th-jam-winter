@@ -40,6 +40,8 @@ func shoot_main() -> void:
 	await shoot_spiral(16, -TAU/64, 0.05)
 	
 	behavior_move.process_mode = prev_process
+	if not is_inside_tree():
+		return
 	timer.start(cooldown)
 	
 func shoot_spiral(amount: float, rotation: float, interval: float) -> void:
@@ -51,9 +53,9 @@ func shoot_spiral(amount: float, rotation: float, interval: float) -> void:
 	p_circle.acceleration = 300
 
 	for i in range(amount):
-		if entity.is_dead:
+		if not is_inside_tree() or entity.is_dead:
 			return
 		p_circle.position = entity.global_position
 		p_circle.create()
-		await get_tree().create_timer(interval, false, true).timeout
 		p_circle.rotation += rotation
+		await get_tree().create_timer(interval, false, true).timeout

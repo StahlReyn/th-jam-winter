@@ -2,13 +2,12 @@ extends Node
 
 var player: Player
 var graze: int = 0
+var game_time: float = 0
 
 const map_size: Vector2 = Vector2(4096, 4096)
 const map_halfsize: Vector2 = map_size / 2
 
-func _ready() -> void:
-	pass
-
+@warning_ignore("shadowed_variable")
 func set_player(player: Player) -> void:
 	self.player = player
 	

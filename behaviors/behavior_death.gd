@@ -3,14 +3,10 @@ extends EntityBehavior
 
 @export var main_sprite: AnimatedSprite2D
 
-static var grayscale_shader: Shader = preload("res://shaders/grayscale.gdshader")
-static var grayscale_material: ShaderMaterial = ShaderMaterial.new()
-
-func _init() -> void:
-	grayscale_material.shader = grayscale_shader
+const GRAYSCALE_MATERIAL: ShaderMaterial = preload("res://shaders/grayscale_material.tres")
 
 func _on_enemy_died() -> void:
-	main_sprite.material = grayscale_material
+	main_sprite.material = GRAYSCALE_MATERIAL
 	var flip_tween: Tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	flip_tween.tween_property(main_sprite, "scale", Vector2(1,1), 0.3)
 	flip_tween.tween_property(main_sprite, "scale", Vector2(-1,1), 0.3)

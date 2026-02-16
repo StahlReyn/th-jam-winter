@@ -10,6 +10,7 @@ extends Node
 @onready var audio_shoot_soft: AudioStreamPlayer = $ShootSoft
 @onready var audio_block: AudioStreamPlayer = $Block
 @onready var audio_collect: AudioStreamPlayer = $Collect
+@onready var audio_pichuun: AudioStreamPlayer = $Pichuun
 
 func play_audio(sound: AudioStream, volume = 0.0) -> void:
 	var node = AudioStreamPlayer.new()
@@ -59,3 +60,6 @@ func play_block() -> void:
 
 func play_collect() -> void:
 	audio_collect.play()
+
+func play_pichuun() -> void:
+	audio_pichuun.play()

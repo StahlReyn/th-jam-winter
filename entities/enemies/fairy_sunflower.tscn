@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="4_lv7wv"]
 [ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="5_vj8ew"]
 [ext_resource type="Script" uid="uid://bt8j5o8i3nqnv" path="res://behaviors/behavior_death.gd" id="7_gs3tc"]
-[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://entities/behavior_hurt.gd" id="8_fu3a2"]
+[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="8_fu3a2"]
 [ext_resource type="Script" uid="uid://k8874lbn0lpd" path="res://behaviors/behavior_spawn.gd" id="9_r2mr5"]
 [ext_resource type="Script" uid="uid://cvgc7rvhic1j4" path="res://entities/enemies/behavior_sunflower.gd" id="10_5a88k"]
 [ext_resource type="Script" uid="uid://dxry1e8r1pi6d" path="res://behaviors/behavior_float.gd" id="10_5mp5u"]
