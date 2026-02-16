@@ -42,7 +42,6 @@ func _deferred_goto_scene(path: String) -> void:
 	var s = ResourceLoader.load(path) # Load the new scene.
 	current_scene = s.instantiate() # Instance the new scene.
 	get_tree().root.add_child(current_scene) # Add it to the active scene, as child of root.
-	queue_free()
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
 	prints("Goto Scene After:", current_scene, get_tree().current_scene)
@@ -52,7 +51,6 @@ func _deferred_goto_scene(path: String) -> void:
 func trans_out() -> void:
 	var scene: Node = get_tree().current_scene
 	if scene is CanvasItem:
-		scene.modulate = Color.WHITE
 		var tween := create_tween()
 		tween.tween_property(scene, "modulate", Color.BLACK, 0.2)
 		await tween.finished
