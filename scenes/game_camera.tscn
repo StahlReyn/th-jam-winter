@@ -3,39 +3,74 @@
 [ext_resource type="Script" uid="uid://cybjxwevadxxi" path="res://scenes/game_camera.gd" id="1_1qhs2"]
 [ext_resource type="Script" uid="uid://diui0487b13ki" path="res://scenes/player_ui.gd" id="2_qq1a7"]
 [ext_resource type="LabelSettings" uid="uid://34atilf1kb6r" path="res://assets/control_themes/label_main.tres" id="3_boway"]
+[ext_resource type="Texture2D" uid="uid://d4ev8oh1nrcf0" path="res://assets/img/bar_snow_back.png" id="4_6xca8"]
+[ext_resource type="Texture2D" uid="uid://ck4bor1l552sc" path="res://assets/img/bar_snow.png" id="4_53imn"]
 
 [node name="GameCamera" type="Camera2D" unique_id=720590421]
 z_index = 100
 script = ExtResource("1_1qhs2")
 metadata/_custom_type_script = "uid://cybjxwevadxxi"
 
-[node name="PlayerUI" type="Node2D" parent="." unique_id=1818529684]
+[node name="PlayerUI" type="Node2D" parent="." unique_id=1818529684 node_paths=PackedStringArray("hp_bar", "hp_bar_label", "snow_bar", "snow_bar_label", "test_label")]
 script = ExtResource("2_qq1a7")
+hp_bar = NodePath("Bars/StatBox/HealthBar/TextureProgressBar")
+hp_bar_label = NodePath("Bars/StatBox/HealthBar/Label")
+snow_bar = NodePath("Bars/StatBox/SnowBar/TextureProgressBar")
+snow_bar_label = NodePath("Bars/StatBox/SnowBar/Label")
+test_label = NodePath("Bars/StatBox/Test")
 
 [node name="Bars" type="Node2D" parent="PlayerUI" unique_id=1778028930]
-position = Vector2(-898, 472)
+position = Vector2(-887, 488)
 
-[node name="CenterContainer" type="CenterContainer" parent="PlayerUI/Bars" unique_id=2060362572]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="StatBox" type="VBoxContainer" parent="PlayerUI/Bars" unique_id=94011478]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -182.0
+offset_right = 512.0
+grow_vertical = 0
 
-[node name="HpBar" type="ProgressBar" parent="PlayerUI/Bars/CenterContainer" unique_id=1301297600]
-custom_minimum_size = Vector2(500, 30)
+[node name="Test" type="Label" parent="PlayerUI/Bars/StatBox" unique_id=1968875139]
 layout_mode = 2
-show_percentage = false
+text = "AAAAAAA"
+label_settings = ExtResource("3_boway")
 
-[node name="Label" type="Label" parent="PlayerUI/Bars/CenterContainer" unique_id=325174753]
+[node name="SnowBar" type="CenterContainer" parent="PlayerUI/Bars/StatBox" unique_id=1359238185]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerUI/Bars/StatBox/SnowBar" unique_id=2002435561]
 layout_mode = 2
 text = "100/100"
 label_settings = ExtResource("3_boway")
 
-[node name="Label" type="Label" parent="PlayerUI/Bars" unique_id=1968875139]
-offset_left = 4.0
-offset_top = -166.0
-offset_right = 150.0
-offset_bottom = -108.0
-text = "AAAAAAA"
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerUI/Bars/StatBox/SnowBar" unique_id=566530249]
+z_index = -1
+texture_filter = 1
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+texture_under = ExtResource("4_6xca8")
+texture_progress = ExtResource("4_53imn")
+tint_under = Color(0.5911141, 0.591114, 0.59111404, 1)
+
+[node name="HealthBar" type="CenterContainer" parent="PlayerUI/Bars/StatBox" unique_id=2060362572]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerUI/Bars/StatBox/HealthBar" unique_id=325174753]
+layout_mode = 2
+text = "100/100"
 label_settings = ExtResource("3_boway")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerUI/Bars/StatBox/HealthBar" unique_id=1121840107]
+modulate = Color(1, 0.608212, 0.7030609, 1)
+z_index = -1
+texture_filter = 1
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("4_6xca8")
+texture_progress = ExtResource("4_53imn")
+tint_under = Color(0.5911141, 0.591114, 0.59111404, 1)
 
 [node name="CoverageTimer" type="Timer" parent="PlayerUI" unique_id=650960869]
 wait_time = 0.05

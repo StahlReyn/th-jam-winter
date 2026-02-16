@@ -77,5 +77,4 @@ script = ExtResource("12_tfcxk")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=12709723]
 stream = ExtResource("12_jmar4")
 volume_db = -8.0
-autoplay = true
 parameters/looping = true

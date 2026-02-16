@@ -15,6 +15,9 @@ func set_player(player: Player) -> void:
 func get_player() -> Player:
 	return player
 
+func get_alive_enemy_count() -> int:
+	return get_tree().get_node_count_in_group("alive_enemy")
+
 # Spawning
 func spawn_bullet_enemy(bullet_scene: PackedScene, color: Color = Color.WHITE) -> Bullet:
 	var scene: SceneBattle = get_tree().current_scene

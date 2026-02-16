@@ -36,7 +36,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
 radius = 64.0
 
-[node name="Fairy" type="Area2D" unique_id=495896401]
+[node name="FairySunflower" type="Area2D" unique_id=495896401 groups=["enemy"]]
+texture_filter = 1
 script = ExtResource("1_5a88k")
 mhp = 50
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"

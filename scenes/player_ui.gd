@@ -1,24 +1,27 @@
 extends Node2D
 
-@onready var hp_bar: ProgressBar = $Bars/CenterContainer/HpBar
-@onready var hp_bar_label: Label  = $Bars/CenterContainer/Label
+@export var hp_bar: TextureProgressBar
+@export var hp_bar_label: Label
+@export var snow_bar: TextureProgressBar
+@export var snow_bar_label: Label
 
-@onready var coverage_label: Label = $Bars/Label
+@export var test_label: Label
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var player: Player = Game.get_player()
 	hp_bar.value = player.hp
 	hp_bar.max_value = player.mhp
 	hp_bar_label.text = str(player.hp) + " / " + str(player.mhp)
+	
+	test_label.text = (
+		"Enemies: " + str(Game.get_alive_enemy_count()) + 
+		"\nGraze: " + str(Game.graze)
+	)
 
 func _on_coverage_timer_timeout() -> void:
-	coverage_label.text = (
-		"Graze: " + str(Game.graze) +
-		"\nSnow: " + "%.2f" % (Game.get_coverage_ratio() * 100) + "%"
-	)
+	var ratio: float = Game.get_coverage_ratio()
+	snow_bar.value = ratio
+	snow_bar_label.text = "%.2f" % (ratio * 100) + "%"
