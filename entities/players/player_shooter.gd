@@ -28,12 +28,14 @@ func _physics_process(delta: float) -> void:
 		)
 		if shoot_countdown <= 0:
 			shoot_countdown = shoot_cooldown
-			var shoot_amount: int = 5
+			@warning_ignore("integer_division")
+			var shoot_amount: int = 5 + Game.power / 100
 			var bullet_speed: float = 1000
-			var spread: float = 0.25
+			var spread: float = 0.1 + 1.0 / shoot_amount
 			var color: Color = Color.AQUA
 			if Input.is_action_pressed("focus"):
-				spread *= 0.2
+				shoot_amount -= 2
+				spread *= 0.25
 				bullet_speed *= 1.5
 				shoot_countdown *= 0.5
 				color = Color.BLUE
@@ -43,7 +45,7 @@ func _physics_process(delta: float) -> void:
 				
 				var angle: float = shoot_arrow.rotation
 				@warning_ignore("integer_division")
-				angle += (i - shoot_amount/2) * spread
+				angle += (i + 0.5 - shoot_amount * 0.5) * spread
 				bullet.rotation = angle
 				bullet.velocity = Vector2.from_angle(angle) * bullet_speed
 			AudioManager.play_shoot1()

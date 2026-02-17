@@ -18,6 +18,10 @@ func _ready() -> void:
 	circle_col = main_collision.shape
 
 func _physics_process(delta: float) -> void:
+	# PLACEHOLDER: For now scale snow size with power
+	@warning_ignore("narrowing_conversion")
+	snow_size = 60 + Game.power * 0.1 + Game.coverage_ratio * 60.0
+	freeze_strength = 1.0 + Game.power * 0.005 + Game.coverage_ratio * 2.0
 	circle_col.radius = snow_size * object_freeze_ratio
 	
 	main_sprite.scale = Vector2.ONE * (snow_size * object_freeze_ratio / 64)

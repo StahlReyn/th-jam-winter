@@ -8,7 +8,7 @@ signal froze
 @export var freeze_recover: float = 0.1
 @export var power_amount: int = 25
 @export var heal_amount: int = 5
-@export var max_health_amount: int = 1
+@export var max_health_amount: int = 2
 @export_category("Visuals")
 @export var main_sprite: Sprite2D
 @export var freeze_bar: TextureProgressBar
@@ -38,7 +38,8 @@ func _physics_process(delta: float) -> void:
 	freeze_bar.max_value = freeze_max
 	freeze_bar.value = freeze_value
 	
-	freeze_value -= freeze_recover * delta
+	if not is_frozen:
+		freeze_value -= freeze_recover * delta
 	freeze_value = clamp(freeze_value, 0, freeze_max)
 
 func progress_freeze(amount: float) -> void:
@@ -58,7 +59,16 @@ func turn_frozen():
 	player.heal(heal_amount)
 	Game.add_power(power_amount)
 	
+	if shake_tween.is_running():
+		shake_tween.stop()
+	if i_show_tween and i_show_tween.is_running():
+		i_show_tween.stop()
+	i_show_tween = create_tween()
+	i_show_tween.tween_property(freeze_bar, "modulate", Color(1,1,1,0), 0.1)
+	
 func show_freeze():
+	if is_frozen:
+		return
 	shake_tween.play()
 	if i_show_tween and i_show_tween.is_running():
 		i_show_tween.stop()
@@ -66,6 +76,8 @@ func show_freeze():
 	i_show_tween.tween_property(freeze_bar, "modulate", Color(1,1,1,1), 0.1)
 
 func hide_freeze():
+	if is_frozen:
+		return
 	if shake_tween.is_running():
 		shake_tween.stop()
 		var tween := create_tween()
