@@ -36,8 +36,8 @@ func shoot_main() -> void:
 	tween.tween_property(main_sprite, "scale", prev_scale, 0.5).set_trans(Tween.TRANS_ELASTIC)
 	tween.parallel().tween_property(main_sprite, "modulate", Color.WHITE, 0.5).set_trans(Tween.TRANS_QUAD)
 	
-	shoot_spiral(16, TAU/64, 0.05)
-	await shoot_spiral(16, -TAU/64, 0.05)
+	shoot_spiral(24, TAU/64, 0.05)
+	await shoot_spiral(24, -TAU/64, 0.05)
 	
 	behavior_move.process_mode = prev_process
 	if not is_inside_tree():
@@ -49,10 +49,11 @@ func shoot_spiral(amount: float, rotation: float, interval: float) -> void:
 	p_circle.bullet_scene = BULLET_SCENE
 	p_circle.bullet_color = Color.YELLOW
 	p_circle.amount = 6
-	p_circle.speed = -300
-	p_circle.acceleration = 300
+	p_circle.speed = -400
+	p_circle.acceleration = 350
 
 	for i in range(amount):
+		AudioManager.play_shoot_soft()
 		p_circle.position = entity.global_position
 		p_circle.create()
 		p_circle.rotation += rotation

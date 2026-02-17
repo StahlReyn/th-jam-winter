@@ -24,8 +24,9 @@ var cur_state = State.FOLLOW
 func _ready() -> void:
 	state_check_timer = Timer.new()
 	state_check_timer.wait_time = state_check_interval
-	state_check_timer.autostart = true
 	state_check_timer.timeout.connect(update_state)
+	add_child(state_check_timer)
+	state_check_timer.start()
 
 func _physics_process(delta: float) -> void:
 	if not entity.is_active:
@@ -64,3 +65,4 @@ func update_state() -> void:
 			cur_state = State.IDLE
 		else:
 			cur_state = State.FOLLOW
+	state_check_timer.start()

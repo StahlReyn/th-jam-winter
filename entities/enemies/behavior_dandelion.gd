@@ -48,11 +48,12 @@ func shoot_spiral(amount: float, rotation: float, interval: float) -> void:
 	var p_circle := PatternCircle.new()
 	p_circle.bullet_scene = BULLET_SCENE
 	p_circle.bullet_color = Color.RED
-	p_circle.amount = 6
+	p_circle.amount = 3
 	p_circle.speed = -100
 	p_circle.acceleration = 200
 
 	for i in range(amount):
+		AudioManager.play_shoot_soft()
 		p_circle.position = entity.global_position
 		p_circle.create()
 		p_circle.rotation += rotation

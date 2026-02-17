@@ -1,31 +1,32 @@
-[gd_scene format=3 uid="uid://m44w3j71748y"]
+[gd_scene format=3 uid="uid://ba0xg473qtghi"]
 
-[ext_resource type="Script" uid="uid://b3sewmccn8kmr" path="res://entities/bullets/bullet.gd" id="1_skrfb"]
-[ext_resource type="Shader" uid="uid://ccqyqgig3d2xq" path="res://shaders/blend_overlay.gdshader" id="2_1t4da"]
-[ext_resource type="Texture2D" uid="uid://bpmu1f026gv17" path="res://assets/img/bullet_small.png" id="3_4pcok"]
+[ext_resource type="Script" uid="uid://b3sewmccn8kmr" path="res://entities/bullets/bullet.gd" id="1_i2dl1"]
+[ext_resource type="Shader" uid="uid://ccqyqgig3d2xq" path="res://shaders/blend_overlay.gdshader" id="2_ni6s2"]
+[ext_resource type="Texture2D" uid="uid://bpmu1f026gv17" path="res://assets/img/bullet_small.png" id="3_ignh8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1dyv1"]
 resource_local_to_scene = true
-shader = ExtResource("2_1t4da")
+shader = ExtResource("2_ni6s2")
 shader_parameter/blend = Color(1, 0, 0, 1)
 shader_parameter/mix_amount = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1jhs2"]
+radius = 14.0
 
-[node name="BulletOval" type="Area2D" unique_id=646688413]
+[node name="BulletSmall" type="Area2D" unique_id=646688413]
 texture_filter = 1
 collision_layer = 4
-script = ExtResource("1_skrfb")
+script = ExtResource("1_i2dl1")
 metadata/_custom_type_script = "uid://b3sewmccn8kmr"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=186218355]
 material = SubResource("ShaderMaterial_1dyv1")
 rotation = 1.5707964
 scale = Vector2(3, 3)
-texture = ExtResource("3_4pcok")
+texture = ExtResource("3_ignh8")
 hframes = 10
 vframes = 13
-frame = 50
+frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1527347449]
 shape = SubResource("CircleShape2D_1jhs2")

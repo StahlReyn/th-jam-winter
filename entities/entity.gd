@@ -24,7 +24,7 @@ var is_dead: bool = false
 
 @export var pushable: bool = true
 @export var push_force: float = 100.0
-@export var mass: float = 1.0
+@export var push_receive: float = 1.0
 
 func _ready() -> void:
 	hp = mhp
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	for area: Area2D in get_overlapping_areas():
 		if area is Entity and area.pushable:
 			var disp: Vector2 = area.global_position - global_position
-			var move_vel: Vector2 = disp.normalized() * push_force / area.mass
+			var move_vel: Vector2 = disp.normalized() * push_force * area.push_receive
 			area.position += move_vel * delta
 	
 	velocity += acceleration * delta

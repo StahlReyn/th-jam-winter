@@ -39,7 +39,9 @@ radius = 72.0
 [node name="FairySunflower" type="Area2D" unique_id=495896401 groups=["enemy"]]
 texture_filter = 1
 script = ExtResource("1_5a88k")
-mhp = 50
+mhp = 80
+push_force = 300.0
+push_receive = 0.5
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
@@ -61,10 +63,10 @@ base_width = 0.7
 [node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
 script = ExtResource("5_vj8ew")
 main_sprite = NodePath("../AnimatedSprite2D")
-move_speed = 270.0
-stop_distance = 350.0
-avoid_distance = 250.0
-avoid_speed = 220.0
+move_speed = 240.0
+stop_distance = 500.0
+avoid_distance = 400.0
+avoid_speed = 180.0
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://c0efxniyajt0p"
 
@@ -94,6 +96,8 @@ metadata/_custom_type_script = "uid://dxry1e8r1pi6d"
 
 [node name="BehaviorSunflower" type="Node" parent="." unique_id=2112868614 node_paths=PackedStringArray("main_sprite", "behavior_move", "entity")]
 script = ExtResource("10_5a88k")
+start_cooldown = 10.0
+cooldown = 20.0
 main_sprite = NodePath("../AnimatedSprite2D")
 behavior_move = NodePath("../BehaviorMove")
 entity = NodePath("..")

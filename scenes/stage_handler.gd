@@ -3,6 +3,7 @@ extends Node
 
 const ENEMY_FAIRY: PackedScene = preload("res://entities/enemies/fairy.tscn")
 const ENEMY_FAIRY_DANDELION: PackedScene = preload("res://entities/enemies/fairy_dandelion.tscn")
+const ENEMY_FAIRY_ROSE: PackedScene = preload("res://entities/enemies/fairy_rose.tscn")
 const ENEMY_FAIRY_SUNFLOWER: PackedScene = preload("res://entities/enemies/fairy_sunflower.tscn")
 
 var scene_battle: SceneBattle
@@ -33,15 +34,20 @@ func random_pos_from_player(distance: float) -> Vector2:
 
 func test_wave() -> void:
 	await create_tween().tween_interval(3.0).finished
+	var cluster_pos = random_pos_from_player(500)
+	spawn_cluster(ENEMY_FAIRY_SUNFLOWER, cluster_pos, 70, 1, 0.5)
+	spawn_cluster(ENEMY_FAIRY_ROSE, cluster_pos, 70, 2, 0.5)
+	spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 3, 0.25)
+	spawn_cluster(ENEMY_FAIRY, cluster_pos, 80, 7, 0.25)
+	await create_tween().tween_interval(30.0).finished
 	wave_1()
 
 # PLACEHOLDER PLACE TO MAKE WAVES
 func wave_1() -> void:
 	while Game.coverage_ratio < 0.10:
 		var cluster_pos = random_pos_from_player(500)
-		spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 2, 0.25)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 100, 3, 0.1)
-		await create_tween().tween_interval(7.0).finished
+		await create_tween().tween_interval(8.0).finished
 	while Game.coverage_ratio < 0.20:
 		var cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 90, 5, 0.1)

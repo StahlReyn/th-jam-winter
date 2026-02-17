@@ -65,7 +65,7 @@ metadata/_custom_type_script = "uid://c0efxniyajt0p"
 
 [node name="BehaviorShoot" type="Node" parent="." unique_id=98492819 node_paths=PackedStringArray("entity")]
 script = ExtResource("6_5vvfg")
-cooldown = 1.5
+cooldown = 2.0
 bullet_speed = 550.0
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://caos6r8xbrfox"
