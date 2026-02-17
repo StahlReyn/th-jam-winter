@@ -16,11 +16,13 @@ func _ready() -> void:
 func goto_scene(path: String) -> void:
 	# Deferred to ensure scene is not deleted while code is running
 	await trans_out()
+	get_tree().paused = true
 	is_scene_loading = true
 	_deferred_goto_scene.call_deferred(path)
 
 func reload_current_scene():
 	await trans_out()
+	get_tree().paused = true
 	is_scene_loading = true
 	_deferred_reload_current_scene.call_deferred()
 
@@ -33,6 +35,7 @@ func _deferred_reload_current_scene() -> void:
 func _deferred_reload_set_scene() -> void:
 	current_scene = get_tree().current_scene
 	prints("Reload Scene AFTER After:", current_scene, get_tree().current_scene)
+	get_tree().paused = false
 	is_scene_loading = false
 	trans_in()
 
@@ -45,6 +48,7 @@ func _deferred_goto_scene(path: String) -> void:
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
 	prints("Goto Scene After:", current_scene, get_tree().current_scene)
+	get_tree().paused = false
 	is_scene_loading = false
 	trans_in()
 	

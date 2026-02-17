@@ -20,8 +20,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("shoot"):
 			SceneManager.reload_current_scene()
 		return
-		
-	Game.update_coverage_ratio()
+	
 	Game.game_time += delta
 
 func spawn_bullet(scene: PackedScene) -> Bullet:
@@ -40,4 +39,7 @@ func _on_player_died() -> void:
 	tween.tween_property(death_sprite, "modulate", Color.WHITE, 1.0)
 	await tween.finished
 	game_over = true
-	
+
+func _on_coverage_timer_timeout() -> void:
+	if not game_over:
+		Game.update_coverage_ratio()

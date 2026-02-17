@@ -1,32 +1,32 @@
-[gd_scene format=3 uid="uid://c1dw26tpqrm6q"]
+[gd_scene format=3 uid="uid://cp0u8l2lxee0c"]
 
-[ext_resource type="Script" uid="uid://bj7e1wqn4spo8" path="res://entities/enemy.gd" id="1_gyh76"]
-[ext_resource type="Texture2D" uid="uid://bfp1s0uos383f" path="res://assets/img/fairy.png" id="2_i4ln7"]
-[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="3_7m8qy"]
-[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="4_pqe4b"]
-[ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="5_fpqfm"]
-[ext_resource type="Script" uid="uid://caos6r8xbrfox" path="res://behaviors/behavior_shoot.gd" id="6_5vvfg"]
-[ext_resource type="Script" uid="uid://bt8j5o8i3nqnv" path="res://behaviors/behavior_death.gd" id="7_187dm"]
-[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="8_jh70n"]
-[ext_resource type="Script" uid="uid://k8874lbn0lpd" path="res://behaviors/behavior_spawn.gd" id="9_i4ln7"]
-[ext_resource type="Script" uid="uid://dxry1e8r1pi6d" path="res://behaviors/behavior_float.gd" id="10_7m8qy"]
+[ext_resource type="Script" uid="uid://bj7e1wqn4spo8" path="res://entities/enemy.gd" id="1_kdgxj"]
+[ext_resource type="Texture2D" uid="uid://c4q2vip88uhf4" path="res://assets/img/fairy_dandelion.png" id="2_kdgxj"]
+[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="3_o1guc"]
+[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="4_w68e1"]
+[ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="5_gbqmb"]
+[ext_resource type="Script" uid="uid://bt8j5o8i3nqnv" path="res://behaviors/behavior_death.gd" id="7_y7jre"]
+[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="8_6vqnn"]
+[ext_resource type="Script" uid="uid://k8874lbn0lpd" path="res://behaviors/behavior_spawn.gd" id="9_xxqgm"]
+[ext_resource type="Script" uid="uid://hp6ewen6gi17" path="res://entities/enemies/behavior_dandelion.gd" id="10_kdgxj"]
+[ext_resource type="Script" uid="uid://dxry1e8r1pi6d" path="res://behaviors/behavior_float.gd" id="10_y6tom"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ro4sr"]
-atlas = ExtResource("2_i4ln7")
+[sub_resource type="AtlasTexture" id="AtlasTexture_cupc2"]
+atlas = ExtResource("2_kdgxj")
 region = Rect2(0, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2rw6p"]
-atlas = ExtResource("2_i4ln7")
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1guc"]
+atlas = ExtResource("2_kdgxj")
 region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2rw6p"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ro4sr")
+"texture": SubResource("AtlasTexture_cupc2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2rw6p")
+"texture": SubResource("AtlasTexture_o1guc")
 }],
 "loop": true,
 "name": &"default",
@@ -34,16 +34,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
-radius = 40.0
+radius = 64.0
 
-[node name="Fairy" type="Area2D" unique_id=495896401 groups=["alive_enemy", "enemy"]]
-script = ExtResource("1_gyh76")
+[node name="FairyDandelion" type="Area2D" unique_id=495896401 groups=["alive_enemy", "enemy"]]
+script = ExtResource("1_kdgxj")
+mhp = 30
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
 sprite_frames = SubResource("SpriteFrames_2rw6p")
-frame = 1
-frame_progress = 0.8707201
+frame_progress = 0.39676678
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397573921]
 shape = SubResource("CircleShape2D_im3hm")
@@ -52,47 +52,49 @@ shape = SubResource("CircleShape2D_im3hm")
 self_modulate = Color(1, 1, 1, 0.2627451)
 z_index = -1
 position = Vector2(0, 90)
-texture = ExtResource("3_7m8qy")
-script = ExtResource("4_pqe4b")
+texture = ExtResource("3_o1guc")
+script = ExtResource("4_w68e1")
 main_sprite = NodePath("../AnimatedSprite2D")
 base_width = 0.7
 
 [node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
-script = ExtResource("5_fpqfm")
+script = ExtResource("5_gbqmb")
 main_sprite = NodePath("../AnimatedSprite2D")
+move_speed = 250.0
+stop_distance = 400.0
+avoid_distance = 300.0
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://c0efxniyajt0p"
 
-[node name="BehaviorShoot" type="Node" parent="." unique_id=98492819 node_paths=PackedStringArray("entity")]
-script = ExtResource("6_5vvfg")
-cooldown = 1.5
-bullet_speed = 550.0
-entity = NodePath("..")
-metadata/_custom_type_script = "uid://caos6r8xbrfox"
-
 [node name="BehaviorDeath" type="Node" parent="." unique_id=1488842329 node_paths=PackedStringArray("main_sprite", "entity")]
-script = ExtResource("7_187dm")
+script = ExtResource("7_y7jre")
 main_sprite = NodePath("../AnimatedSprite2D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bt8j5o8i3nqnv"
 
 [node name="BehaviorHurt" type="Node" parent="." unique_id=1665522577 node_paths=PackedStringArray("main_sprite", "entity")]
-script = ExtResource("8_jh70n")
+script = ExtResource("8_6vqnn")
 main_sprite = NodePath("../AnimatedSprite2D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://b7wcbedd5f40v"
 
 [node name="BehaviorSpawn" type="Node" parent="." unique_id=1676203199 node_paths=PackedStringArray("main_sprite", "entity")]
-script = ExtResource("9_i4ln7")
+script = ExtResource("9_xxqgm")
 main_sprite = NodePath("../AnimatedSprite2D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://k8874lbn0lpd"
 
 [node name="BehaviorFloat" type="Node" parent="." unique_id=1171902060 node_paths=PackedStringArray("main_sprite", "entity")]
-script = ExtResource("10_7m8qy")
+script = ExtResource("10_y6tom")
 main_sprite = NodePath("../AnimatedSprite2D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://dxry1e8r1pi6d"
+
+[node name="BehaviorDandelion" type="Node" parent="." unique_id=1447255521 node_paths=PackedStringArray("main_sprite", "behavior_move", "entity")]
+script = ExtResource("10_kdgxj")
+main_sprite = NodePath("../AnimatedSprite2D")
+behavior_move = NodePath("../BehaviorMove")
+entity = NodePath("..")
 
 [connection signal="died" from="." to="BehaviorDeath" method="_on_enemy_died"]
 [connection signal="died" from="." to="BehaviorFloat" method="_on_enemy_died"]

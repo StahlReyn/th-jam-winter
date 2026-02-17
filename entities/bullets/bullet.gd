@@ -6,6 +6,7 @@ extends Entity
 @onready var main_sprite: Sprite2D = $Sprite2D
 
 var despawn_size: Vector2 = Game.map_halfsize + Vector2(64,64)
+var despawn_radius_sq: float = 1600**2
 
 func _ready() -> void:
 	collision_layer = COL_BULLET
@@ -17,7 +18,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-	if abs(position.x) > despawn_size.x or abs(position.y) > despawn_size.y:
+	#if abs(position.x) > despawn_size.x or abs(position.y) > despawn_size.y:
+	if global_position.distance_squared_to(Game.player.global_position) > despawn_radius_sq:
 		despawn()
 
 func spawn_anim() -> void:

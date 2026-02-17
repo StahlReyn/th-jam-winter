@@ -122,6 +122,11 @@ volume_db = -8.0
 autoplay = true
 parameters/looping = true
 
+[node name="CoverageTimer" type="Timer" parent="." unique_id=691314355]
+process_callback = 0
+wait_time = 0.1
+autostart = true
+
 [node name="Tree" parent="." unique_id=1083082583 instance=ExtResource("15_tmjjs")]
 position = Vector2(1202, -483)
 
@@ -181,3 +186,4 @@ position = Vector2(-1285, -729)
 init_sprite_x = 1
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="timeout" from="CoverageTimer" to="." method="_on_coverage_timer_timeout"]

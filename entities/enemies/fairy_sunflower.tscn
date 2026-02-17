@@ -34,7 +34,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
-radius = 64.0
+radius = 72.0
 
 [node name="FairySunflower" type="Area2D" unique_id=495896401 groups=["enemy"]]
 texture_filter = 1
@@ -61,7 +61,10 @@ base_width = 0.7
 [node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
 script = ExtResource("5_vj8ew")
 main_sprite = NodePath("../AnimatedSprite2D")
-move_speed = 200.0
+move_speed = 270.0
+stop_distance = 350.0
+avoid_distance = 250.0
+avoid_speed = 220.0
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://c0efxniyajt0p"
 

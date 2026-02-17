@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	countdown -= delta
 	
 	while countdown < 0:
-		var bullet = Game.spawn_bullet_enemy(bullet_scene, Color.RED)
+		var bullet = Game.spawn_bullet_enemy(bullet_scene, Color.BLUE)
 		bullet.global_position = entity.global_position
 		
 		var player: Player = Game.get_player()
