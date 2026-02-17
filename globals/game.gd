@@ -17,6 +17,12 @@ func get_player() -> Player:
 func get_alive_enemy_count() -> int:
 	return get_tree().get_node_count_in_group("alive_enemy")
 
+func get_interactable_count() -> int:
+	return get_tree().get_node_count_in_group("interactable")
+
+func get_frozen_interactable_count() -> int:
+	return get_tree().get_node_count_in_group("frozen_interactable")
+
 # Spawning
 func spawn_bullet_enemy(bullet_scene: PackedScene, color: Color = Color.WHITE) -> Bullet:
 	var scene: SceneBattle = get_tree().current_scene

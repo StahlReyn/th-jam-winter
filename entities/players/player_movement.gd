@@ -8,8 +8,6 @@ extends Node
 @export var focus_sprite: Sprite2D
 @export var graze_sprite: Sprite2D
 
-var velocity: Vector2 = Vector2.ZERO
-
 var graze_rotation_speed: float = 1
 var focus_anim_speed: float = 20
 var focused_scale: Vector2 = Vector2.ONE * 3
@@ -21,11 +19,7 @@ var is_moving: bool = false
 var player_bounce_tween: Tween
 var bounce_time: float = 0.07
 
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-
 func _ready() -> void:
-	rng.seed = 1234
-	
 	player_bounce_tween = create_tween().set_loops().set_trans(Tween.TRANS_SINE)
 	player_bounce_tween.tween_property(player_sprite, "position", Vector2(0,-20), bounce_time)
 	player_bounce_tween.parallel().tween_property(player_sprite, "rotation", 0.2, bounce_time*2)
@@ -73,16 +67,12 @@ func process_movement(delta: float) -> void:
 	
 	if dir == Vector2.ZERO:
 		is_moving = false
+		player.velocity = Vector2.ZERO
 	else:
 		is_moving = true
-		velocity = dir * get_speed()
-		player.position += velocity * delta
-		player.position = player.position.clamp(-Game.map_halfsize, Game.map_halfsize)
+		player.velocity = dir * get_speed()
+		player.aim_angle = dir.angle()
 	
-	if velocity != Vector2.ZERO:
-		Game.set_paint_brush_size(70)
-		Game.paint_map(player.position + Vector2(rng.randi_range(-20,20), rng.randi_range(-20,20)))
-
 func process_focus(delta: float) -> void:
 	graze_sprite.rotate(graze_rotation_speed * delta)
 	if Input.is_action_pressed("focus"):
@@ -105,5 +95,6 @@ func clean_up_focus() -> void:
 	tween.parallel().tween_property(graze_sprite, "scale", unfocused_scale, time)
 
 func _on_player_died() -> void:
+	player.velocity = Vector2.ZERO
 	player_bounce_tween.stop()
 	clean_up_focus()

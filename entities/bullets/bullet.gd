@@ -2,8 +2,6 @@ class_name Bullet
 extends Entity
 
 @export var damage: int = 1
-@export var velocity: Vector2 = Vector2.ZERO
-@export var acceleration: Vector2 = Vector2.ZERO
 
 @onready var main_sprite: Sprite2D = $Sprite2D
 
@@ -16,9 +14,8 @@ func _ready() -> void:
 	z_index = 10
 	spawn_anim()
 
-func _process(delta: float) -> void:
-	velocity += acceleration * delta
-	position += velocity * delta
+func _physics_process(delta: float) -> void:
+	super(delta)
 	
 	if abs(position.x) > despawn_size.x or abs(position.y) > despawn_size.y:
 		despawn()

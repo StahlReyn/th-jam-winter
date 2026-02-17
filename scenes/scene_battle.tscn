@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" uid="uid://brwhj6bphusm8" path="res://scenes/scene_battle.gd" id="1_0lckg"]
 [ext_resource type="PackedScene" uid="uid://c0yrlcqoqkhks" path="res://entities/players/player.tscn" id="1_v1i1e"]
-[ext_resource type="Texture2D" uid="uid://ddi6h1gia6thh" path="res://assets/img/bg_nameless.png" id="2_ehaqs"]
 [ext_resource type="Texture2D" uid="uid://bjekbij6p6lja" path="res://assets/img/center_gradient.png" id="4_jmar4"]
 [ext_resource type="Script" uid="uid://bnerqth6yt4qj" path="res://scenes/game_map.gd" id="5_0r0km"]
 [ext_resource type="PackedScene" uid="uid://cv51hdonthxaq" path="res://scenes/game_camera.tscn" id="5_fpdu6"]
 [ext_resource type="LabelSettings" uid="uid://h8m05n2fwoef" path="res://assets/control_themes/label_died.tres" id="5_xn66u"]
 [ext_resource type="Script" uid="uid://bhjeh7l1rposv" path="res://scenes/brush.gd" id="6_70o65"]
-[ext_resource type="Texture2D" uid="uid://xdfhn3d3hjwb" path="res://assets/img/snow.png" id="6_e7kjp"]
 [ext_resource type="Script" uid="uid://ylx35lqj7fdq" path="res://scenes/draw_viewport.gd" id="6_is3ya"]
 [ext_resource type="LabelSettings" uid="uid://34atilf1kb6r" path="res://assets/control_themes/label_main.tres" id="6_tmjjs"]
 [ext_resource type="Texture2D" uid="uid://b4xeeo7ajqrvp" path="res://assets/img/brush_snow.png" id="8_pxl38"]
+[ext_resource type="Texture2D" uid="uid://d4d6a7tso7snn" path="res://assets/img/map_spring.png" id="8_xn66u"]
 [ext_resource type="Texture2D" uid="uid://c038ay8xmnjuj" path="res://assets/img/brush_snow_2.png" id="10_qga8c"]
 [ext_resource type="AudioStream" uid="uid://bjl52jx2w1tqb" path="res://assets/audio/bgm/projectileslop.ogg" id="12_jmar4"]
 [ext_resource type="Script" uid="uid://b5ck8arntrlgj" path="res://scenes/stage_handler.gd" id="12_tfcxk"]
+[ext_resource type="PackedScene" uid="uid://ctlfxhbv7l0o8" path="res://entities/tree.tscn" id="15_tmjjs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qga8c"]
 blend_mode = 1
@@ -25,8 +25,10 @@ viewport_path = NodePath("GameMap/DrawViewport")
 [node name="SceneBattle" type="Node2D" unique_id=1447413065]
 y_sort_enabled = true
 script = ExtResource("1_0lckg")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=2137173324 instance=ExtResource("1_v1i1e")]
+metadata/_edit_lock_ = true
 
 [node name="GameCamera" parent="." unique_id=720590421 node_paths=PackedStringArray("follow_node") instance=ExtResource("5_fpdu6")]
 follow_node = NodePath("../Player")
@@ -71,11 +73,11 @@ z_index = -100
 script = ExtResource("5_0r0km")
 metadata/_edit_lock_ = true
 
-[node name="BgNameless" type="Sprite2D" parent="GameMap" unique_id=1524410803]
+[node name="Main" type="Sprite2D" parent="GameMap" unique_id=1524410803]
 z_index = -10
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("2_ehaqs")
+texture = ExtResource("8_xn66u")
 metadata/_edit_lock_ = true
 
 [node name="SnowDraw" type="Sprite2D" parent="GameMap" unique_id=209862275]
@@ -100,14 +102,6 @@ script = ExtResource("6_70o65")
 textures = Array[Texture2D]([ExtResource("8_pxl38"), ExtResource("10_qga8c")])
 metadata/_edit_lock_ = true
 
-[node name="Snow" type="Sprite2D" parent="GameMap" unique_id=467511572]
-visible = false
-texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("6_e7kjp")
-centered = false
-metadata/_edit_lock_ = true
-
 [node name="StageHandler" type="Node" parent="." unique_id=1566043013]
 script = ExtResource("12_tfcxk")
 
@@ -116,5 +110,11 @@ stream = ExtResource("12_jmar4")
 volume_db = -8.0
 autoplay = true
 parameters/looping = true
+
+[node name="Tree" parent="." unique_id=1083082583 instance=ExtResource("15_tmjjs")]
+position = Vector2(1294, 101)
+
+[node name="Tree2" parent="." unique_id=1720676329 instance=ExtResource("15_tmjjs")]
+position = Vector2(804, 526)
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]

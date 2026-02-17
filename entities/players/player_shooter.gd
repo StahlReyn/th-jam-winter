@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	shoot_countdown -= delta
 	
 	shoot_arrow.rotation = MathUtils.lerp_angle_smooth(
-		shoot_arrow.rotation, player_movement.velocity.angle(), 20, delta
+		shoot_arrow.rotation, player.aim_angle, 20, delta
 	)
 	
 	if Input.is_action_pressed("shoot"):

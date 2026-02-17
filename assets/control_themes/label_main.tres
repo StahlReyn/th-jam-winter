@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://wqcv5nneer8f" path="res://assets/fonts/Sriracha-Regular.ttf" id="1_tsdn5"]
 
 [resource]
+paragraph_spacing = -10.0
 font = ExtResource("1_tsdn5")
 font_size = 32
 outline_size = 12

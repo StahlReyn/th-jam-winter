@@ -20,8 +20,11 @@ func _physics_process(delta: float) -> void:
 	
 	test_label.text = (
 		"Time: " + "%.2f" % Game.game_time +
+		"\nGraze: " + str(Game.graze) + 
 		"\nEnemies: " + str(Game.get_alive_enemy_count()) + 
-		"\nGraze: " + str(Game.graze)
+		"\nFrozen Objects: " + 
+		str(Game.get_frozen_interactable_count()) + " / " +
+		str(Game.get_interactable_count())
 	)
 
 func _on_coverage_timer_timeout() -> void:
