@@ -10,6 +10,7 @@ var game_over: bool = false
 var game_time: float = 0.0
 
 func _ready() -> void:
+	Game.reset_game_variables()
 	Game.set_player($Player)
 	death_sprite.modulate = Color(1,1,1,0)
 	stage_handler.test_wave()
@@ -18,8 +19,10 @@ func _physics_process(delta: float) -> void:
 	if game_over:
 		if Input.is_action_just_pressed("shoot"):
 			SceneManager.reload_current_scene()
-	else:
-		Game.game_time += delta
+		return
+		
+	Game.update_coverage_ratio()
+	Game.game_time += delta
 
 func spawn_bullet(scene: PackedScene) -> Bullet:
 	var bullet: Bullet = scene.instantiate()

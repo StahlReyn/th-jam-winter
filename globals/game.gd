@@ -1,9 +1,12 @@
 extends Node
 
 var player: Player
+var power: int = 0
 var graze: int = 0
-var game_time: float = 0
+var game_time: float = 0.0
+var coverage_ratio: float = 0.0
 
+var max_power: int = 400
 const map_size: Vector2 = Vector2(4096, 4096)
 const map_halfsize: Vector2 = map_size / 2
 
@@ -13,6 +16,16 @@ func set_player(player: Player) -> void:
 	
 func get_player() -> Player:
 	return player
+
+func reset_game_variables() -> void:
+	power = 0
+	graze = 0
+	game_time = 0.0
+	coverage_ratio = 0.0
+
+func add_power(amount: int) -> void:
+	power += amount
+	power = clamp(power, 0, max_power)
 
 func get_alive_enemy_count() -> int:
 	return get_tree().get_node_count_in_group("alive_enemy")
@@ -39,9 +52,9 @@ func spawn_bullet_player(bullet_scene: PackedScene, color: Color = Color.WHITE) 
 	return bullet
 
 # Paints
-func get_coverage_ratio() -> float:
+func update_coverage_ratio() -> void:
 	var scene: SceneBattle = get_tree().current_scene
-	return scene.game_map.get_coverage_ratio()
+	coverage_ratio = scene.game_map.get_coverage_ratio()
 
 func get_game_map() -> GameMap:
 	var scene: SceneBattle = get_tree().current_scene

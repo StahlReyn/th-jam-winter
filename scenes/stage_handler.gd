@@ -12,24 +12,32 @@ func _ready() -> void:
 	rng.seed = 123456
 	scene_battle = get_parent()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	pass
 
+func spawn_cluster(scene: PackedScene, position: Vector2, spread: float, amount: int, interval: float):
+	for i in range(amount):
+		var enemy: Enemy = scene_battle.spawn_enemy(scene)
+		enemy.position = position + Vector2(
+			rng.randfn(0, spread), 
+			rng.randfn(0, spread)
+		)
+		await get_tree().create_timer(interval, false, true).timeout
+
+func random_pos_from_player(distance: float) -> Vector2:
+	return (
+		Game.get_player().position + 
+		Vector2.from_angle(rng.randf_range(0, TAU)) * distance
+	)
+
 func test_wave() -> void:
-	var spawn_spread = 300
-	var spread = 70
 	await get_tree().create_timer(3.0, false, true).timeout
-	for a in range(32):
-		var cluster_pos = Game.get_player().position
-		cluster_pos += Vector2.from_angle(rng.randf_range(0, TAU)) * spawn_spread
-		for i in range(8):
-			var scene := ENEMY_FAIRY
-			if i % 4 == 0:
-				scene = ENEMY_FAIRY_SUNFLOWER
-			var enemy: Enemy = scene_battle.spawn_enemy(scene)
-			enemy.position = cluster_pos + Vector2(
-				rng.randfn(0, spread), 
-				rng.randfn(0, spread)
-			)
-			await get_tree().create_timer(0.08, false, true).timeout
+	while Game.coverage_ratio < 0.5:
+		var cluster_pos = random_pos_from_player(300)
+		spawn_cluster(ENEMY_FAIRY_SUNFLOWER, cluster_pos, 70, 2, 0.20)
+		await spawn_cluster(ENEMY_FAIRY, cluster_pos, 70, 8, 0.08)
 		await get_tree().create_timer(8.0, false, true).timeout
+
+# PLACEHOLDER PLACE TO MAKE WAVES
+func wave_1() -> void:
+	pass

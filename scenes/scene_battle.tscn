@@ -112,9 +112,61 @@ autoplay = true
 parameters/looping = true
 
 [node name="Tree" parent="." unique_id=1083082583 instance=ExtResource("15_tmjjs")]
-position = Vector2(1294, 101)
+position = Vector2(1202, -483)
 
 [node name="Tree2" parent="." unique_id=1720676329 instance=ExtResource("15_tmjjs")]
-position = Vector2(804, 526)
+position = Vector2(998, 993)
+init_sprite_x = 1
+
+[node name="Tree3" parent="." unique_id=840746545 instance=ExtResource("15_tmjjs")]
+position = Vector2(-1607, -365)
+
+[node name="Tree4" parent="." unique_id=858872819 instance=ExtResource("15_tmjjs")]
+position = Vector2(-1652, 985)
+
+[node name="Tree5" parent="." unique_id=1216251209 instance=ExtResource("15_tmjjs")]
+position = Vector2(-1024, 873)
+init_sprite_x = 1
+
+[node name="Tree6" parent="." unique_id=453636033 instance=ExtResource("15_tmjjs")]
+position = Vector2(-559, -471)
+init_sprite_x = 3
+
+[node name="Tree7" parent="." unique_id=897580964 instance=ExtResource("15_tmjjs")]
+position = Vector2(1692, 1455)
+init_sprite_x = 2
+
+[node name="Tree8" parent="." unique_id=628268347 instance=ExtResource("15_tmjjs")]
+position = Vector2(1742, 391)
+
+[node name="Tree9" parent="." unique_id=36735178 instance=ExtResource("15_tmjjs")]
+position = Vector2(448, -1034)
+
+[node name="Tree10" parent="." unique_id=720030539 instance=ExtResource("15_tmjjs")]
+position = Vector2(-130, 1837)
+init_sprite_x = 1
+
+[node name="Tree11" parent="." unique_id=464291961 instance=ExtResource("15_tmjjs")]
+position = Vector2(1225, -1178)
+init_sprite_x = 2
+
+[node name="Tree12" parent="." unique_id=606685315 instance=ExtResource("15_tmjjs")]
+position = Vector2(-1227, -1221)
+init_sprite_x = 2
+
+[node name="Tree13" parent="." unique_id=337370105 instance=ExtResource("15_tmjjs")]
+position = Vector2(-1236, 1757)
+init_sprite_x = 3
+
+[node name="Tree14" parent="." unique_id=1258661236 instance=ExtResource("15_tmjjs")]
+position = Vector2(981, 1696)
+
+[node name="Tree15" parent="." unique_id=137106427 instance=ExtResource("15_tmjjs")]
+position = Vector2(-429, -1551)
+init_sprite_x = 1
+
+[node name="Tree16" parent="." unique_id=286228929 instance=ExtResource("15_tmjjs")]
+position = Vector2(-1285, -729)
+init_sprite_x = 1
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]

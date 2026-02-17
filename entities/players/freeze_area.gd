@@ -6,6 +6,7 @@ extends Area2D
 @export var object_freeze_ratio: float = 2.0
 
 @onready var main_collision: CollisionShape2D = $CollisionShape2D
+@onready var main_sprite: Sprite2D = $Sprite2D
 
 var circle_col: CircleShape2D
 
@@ -19,6 +20,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	circle_col.radius = snow_size * object_freeze_ratio
 	
+	main_sprite.scale = Vector2.ONE * (snow_size * object_freeze_ratio / 64)
+	main_sprite.rotate(0.4 * delta)
+	
 	if player.velocity != Vector2.ZERO:
 		Game.set_paint_brush_size(snow_size)
 		Game.paint_map(player.position + Vector2(rng.randi_range(-20,20), rng.randi_range(-20,20)))
@@ -26,8 +30,7 @@ func _physics_process(delta: float) -> void:
 	for area: Area2D in get_overlapping_areas():
 		if area is Interactable:
 			area.progress_freeze(freeze_strength * delta)
-
-
+	
 func _on_area_entered(area: Area2D) -> void:
 	if area is Interactable:
 		area.show_freeze()
@@ -35,3 +38,6 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_area_exited(area: Area2D) -> void:
 	if area is Interactable:
 		area.hide_freeze()
+
+func _on_player_died() -> void:
+	collision_layer = 0

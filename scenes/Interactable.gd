@@ -3,11 +3,16 @@ extends Entity
 
 signal froze
 
+@export_category("Gameplay")
 @export var freeze_max: float = 5.0
 @export var freeze_recover: float = 0.1
-
-@export var freeze_bar: TextureProgressBar
+@export var power_amount: int = 25
+@export var heal_amount: int = 5
+@export var max_health_amount: int = 1
+@export_category("Visuals")
 @export var main_sprite: Sprite2D
+@export var freeze_bar: TextureProgressBar
+@export var init_sprite_x: int = 0 ## PLACEHOLDER TREE VARIANT
 
 var freeze_value: float = 0.0
 var is_frozen: bool = false
@@ -21,6 +26,7 @@ func _ready() -> void:
 	collision_mask = COL_MAIN
 	super()
 	
+	main_sprite.frame_coords.x = init_sprite_x
 	shake_tween = create_tween().set_loops().set_trans(Tween.TRANS_SINE)
 	shake_tween.tween_property(main_sprite, "position", Vector2(3, 0), 0.08)
 	shake_tween.tween_property(main_sprite, "position", Vector2(-3, 0), 0.08)
@@ -46,6 +52,11 @@ func turn_frozen():
 	froze.emit()
 	# TEMPORARY METHOD
 	main_sprite.frame_coords.y = 2
+	
+	var player := Game.get_player()
+	player.mhp += max_health_amount
+	player.heal(heal_amount)
+	Game.add_power(power_amount)
 	
 func show_freeze():
 	shake_tween.play()

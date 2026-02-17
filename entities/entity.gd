@@ -51,6 +51,10 @@ func take_damage(amount: int) -> void:
 	if hp <= 0 and not is_dead:
 		die()
 
+func heal(amount: int) -> void:
+	hp += amount
+	hp = clamp(hp, 0, mhp)
+
 func die() -> void:
 	is_dead = true
 	is_active = false

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://3uirxllo67w4" path="res://entities/players/freeze_area.gd" id="9_5m3yc"]
 [ext_resource type="Texture2D" uid="uid://blulpnvflgawy" path="res://assets/img/shoot_arrow.png" id="9_ef06p"]
 [ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="10_tjdhl"]
+[ext_resource type="Texture2D" uid="uid://i354wmym7kgd" path="res://assets/img/freeze_circle.png" id="10_uyp6b"]
 [ext_resource type="Script" uid="uid://c2fgjew85hiea" path="res://entities/players/graze_area.gd" id="11_x08pd"]
 [ext_resource type="Script" uid="uid://c18yglnabuygt" path="res://behaviors/behavior_death_fall.gd" id="12_4tuy0"]
 
@@ -80,6 +81,7 @@ position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_x08pd")
 
 [node name="FreezeArea" type="Area2D" parent="." unique_id=834202701 node_paths=PackedStringArray("player")]
+z_index = -5
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("9_5m3yc")
@@ -87,6 +89,11 @@ player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeArea" unique_id=340550564]
 shape = SubResource("CircleShape2D_4tuy0")
+
+[node name="Sprite2D" type="Sprite2D" parent="FreezeArea" unique_id=1003731680]
+modulate = Color(1, 1, 1, 0.45490196)
+texture_filter = 1
+texture = ExtResource("10_uyp6b")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=1118973317 node_paths=PackedStringArray("player", "player_sprite", "focus_sprite", "graze_sprite")]
 script = ExtResource("5_qly61")
@@ -117,6 +124,7 @@ metadata/_custom_type_script = "uid://c18yglnabuygt"
 [connection signal="died" from="." to="GrazeArea" method="_on_player_died"]
 [connection signal="died" from="." to="PlayerMovement" method="_on_player_died"]
 [connection signal="died" from="." to="BehaviorDeathFall" method="_on_entity_died"]
+[connection signal="died" from="." to="FreezeArea" method="_on_player_died"]
 [connection signal="took_damage" from="." to="BehaviorHurt" method="_on_entity_took_damage"]
 [connection signal="area_entered" from="FreezeArea" to="FreezeArea" method="_on_area_entered"]
 [connection signal="area_exited" from="FreezeArea" to="FreezeArea" method="_on_area_exited"]

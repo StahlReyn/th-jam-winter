@@ -64,6 +64,7 @@ bomb={
 
 [physics]
 
+common/max_physics_steps_per_frame=1
 3d/physics_engine="Jolt Physics"
 
 [rendering]

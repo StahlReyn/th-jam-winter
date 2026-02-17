@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int) -> void:
 	super(amount)
 	AudioManager.play_block()
-
+	
 func die() -> void:
 	super()
 	AudioManager.play_pichuun()
