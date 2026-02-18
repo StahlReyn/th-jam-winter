@@ -10,7 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://c31gv4pjhwb1w" path="res://assets/img/point_items.png" id="8_umdfq"]
 [ext_resource type="Texture2D" uid="uid://67cyg60yn27q" path="res://assets/img/bar_short_back.png" id="9_0n2od"]
 [ext_resource type="Texture2D" uid="uid://bl1goxqc8doob" path="res://assets/img/life.png" id="10_acwlk"]
+[ext_resource type="FontFile" uid="uid://wqcv5nneer8f" path="res://assets/fonts/Sriracha-Regular.ttf" id="11_0n2od"]
 [ext_resource type="Script" uid="uid://6fjlqr4gdlay" path="res://scenes/fps_label.gd" id="11_umdfq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_acwlk"]
+paragraph_spacing = -10.0
+font = ExtResource("11_0n2od")
+font_size = 24
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="GameCamera" type="Camera2D" unique_id=720590421]
 z_index = 100
@@ -140,11 +148,13 @@ scale = Vector2(3, 3)
 texture = ExtResource("10_acwlk")
 hframes = 5
 
-[node name="Label" type="Label" parent="." unique_id=785560697]
+[node name="FPSLabel" type="Label" parent="." unique_id=785560697]
+modulate = Color(1, 1, 1, 0.57254905)
+z_index = 10
 offset_left = -928.0
-offset_top = -528.0
+offset_top = -524.0
 offset_right = -818.0
-offset_bottom = -470.0
+offset_bottom = -466.0
 text = "FPS: 60"
-label_settings = ExtResource("3_boway")
+label_settings = SubResource("LabelSettings_acwlk")
 script = ExtResource("11_umdfq")

@@ -13,6 +13,13 @@ var max_power: int = 400
 const map_size: Vector2 = Vector2(4096, 4096)
 const map_halfsize: Vector2 = map_size / 2
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("fullscreen"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED) 
+
 @warning_ignore("shadowed_variable")
 func set_player(player: Player) -> void:
 	self.player = player

@@ -10,6 +10,13 @@ font_size = 64
 outline_size = 24
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tk4wt"]
+paragraph_spacing = -16.0
+font = ExtResource("3_tk4wt")
+font_size = 26
+outline_size = 14
+outline_color = Color(0, 0, 0, 1)
+
 [node name="SceneMainMenu" type="Node2D" unique_id=131658857]
 script = ExtResource("1_tk4wt")
 
@@ -18,10 +25,22 @@ texture = ExtResource("1_wqhsr")
 centered = false
 
 [node name="Start" type="Node2D" parent="." unique_id=1278988694]
-position = Vector2(748, 892)
+position = Vector2(727, 904)
 
 [node name="Label" type="Label" parent="Start" unique_id=696480921]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Press [Z] to start"
 label_settings = SubResource("LabelSettings_3kjnk")
+
+[node name="Label2" type="Label" parent="." unique_id=232900147]
+offset_left = 22.0
+offset_top = 10.0
+offset_right = 590.0
+offset_bottom = 217.0
+text = "Credit: 
+Art + Program: ReynStahl
+Music: thenyancatcookie, Hibushi Hina
+
+[F11] Fullscreen"
+label_settings = SubResource("LabelSettings_tk4wt")
