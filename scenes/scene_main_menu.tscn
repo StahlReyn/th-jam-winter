@@ -18,7 +18,7 @@ texture = ExtResource("1_wqhsr")
 centered = false
 
 [node name="Start" type="Node2D" parent="." unique_id=1278988694]
-position = Vector2(859, 478)
+position = Vector2(748, 892)
 
 [node name="Label" type="Label" parent="Start" unique_id=696480921]
 offset_right = 40.0

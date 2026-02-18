@@ -42,39 +42,44 @@ func wave_1() -> void:
 	var cluster_pos: Vector2
 	#Game.coverage_ratio = 0.9
 	#Game.power = 400
-	while Game.coverage_ratio < 0.10:
+	while Game.coverage_ratio < 0.05:
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 100, 3, 0.2)
 		await create_tween().tween_interval(10.0).finished
-	while Game.coverage_ratio < 0.20:
+	while Game.coverage_ratio < 0.15:
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 90, 5, 0.2)
 		await create_tween().tween_interval(10.0).finished
-	while Game.coverage_ratio < 0.30:
+	while Game.coverage_ratio < 0.25:
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 1, 0.25)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 70, 4, 0.1)
 		await create_tween().tween_interval(12.0).finished
-	while Game.coverage_ratio < 0.50:
+	while Game.coverage_ratio < 0.40:
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY_ROSE, cluster_pos, 70, 1, 0.25)
 		spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 2, 0.25)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 70, 3, 0.1)
 		await create_tween().tween_interval(12.0).finished
-	while Game.coverage_ratio < 0.65:
+	while Game.coverage_ratio < 0.60:
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY_SUNFLOWER, cluster_pos, 70, 1, 0.50)
 		spawn_cluster(ENEMY_FAIRY_ROSE, cluster_pos, 70, 1, 0.25)
 		spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 1, 0.25)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 70, 3, 0.08)
-		await create_tween().tween_interval(12.0).finished
-	while Game.coverage_ratio < 0.80:
+		await create_tween().tween_interval(18.0).finished
+	while Game.coverage_ratio < 0.75:
+		# Also delay at start to prevent 2 sandwiched
+		await create_tween().tween_interval(5.0).finished
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY_SUNFLOWER, cluster_pos, 70, 2, 1.50)
 		spawn_cluster(ENEMY_FAIRY_ROSE, cluster_pos, 70, 2, 0.50)
 		spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 3, 0.50)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 70, 3, 0.08)
-		await create_tween().tween_interval(12.0).finished
+		await create_tween().tween_interval(20.0).finished
+	# Calm Buffer
+	while Game.coverage_ratio < 0.80:
+		await create_tween().tween_interval(1.0).finished
 	# Lily Wave here
 	scene_battle.start_wave()
 	await create_tween().tween_interval(2.0).finished
@@ -82,13 +87,13 @@ func wave_1() -> void:
 	spawn_cluster(ENEMY_LILY_WHITE, cluster_pos, 0, 1, 0.2)
 	spawn_cluster(ENEMY_FAIRY_SUNFLOWER, cluster_pos, 70, 2, 1.50)
 	spawn_cluster(ENEMY_FAIRY_ROSE, cluster_pos, 70, 3, 0.3)
-	await create_tween().tween_interval(15.0).finished
+	await create_tween().tween_interval(20.0).finished
 	while Game.coverage_ratio < 0.95:
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY_DANDELION, cluster_pos, 70, 3, 0.50)
 		spawn_cluster(ENEMY_FAIRY, cluster_pos, 70, 2, 0.08)
-		await create_tween().tween_interval(10.0).finished
+		await create_tween().tween_interval(15.0).finished
 		cluster_pos = random_pos_from_player(500)
 		spawn_cluster(ENEMY_FAIRY_SUNFLOWER, cluster_pos, 70, 1, 1.50)
 		spawn_cluster(ENEMY_FAIRY_ROSE, cluster_pos, 70, 2, 0.50)
-		await create_tween().tween_interval(10.0).finished
+		await create_tween().tween_interval(15.0).finished

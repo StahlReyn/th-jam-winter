@@ -7,9 +7,9 @@ signal froze
 @export var freeze_max: float = 5.0
 @export var freeze_recover: float = 0.1
 @export var power_amount: int = 25
-@export var heal_amount: int = 3
-@export var max_health_amount: int = 2
-@export var score_drop: int = 20000
+@export var heal_amount: int = 5
+@export var max_health_amount: int = 3
+@export var score_drop: int = 25000
 @export_category("Visuals")
 @export var main_sprite: Sprite2D
 @export var freeze_bar: TextureProgressBar

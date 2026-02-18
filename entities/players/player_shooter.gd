@@ -4,7 +4,7 @@ extends Node
 @export var player: Player
 @export var player_movement: PlayerMovement
 @export var shoot_arrow: Node2D
-@export var shoot_cooldown: float = 0.2
+@export var shoot_cooldown: float = 0.15
 
 var bullet_scene: PackedScene = preload("res://entities/bullets/bullet_ice.tscn")
 var shoot_countdown: float = shoot_cooldown
@@ -31,13 +31,13 @@ func _physics_process(delta: float) -> void:
 			@warning_ignore("integer_division")
 			var shoot_amount: int = 5 + Game.power / 100
 			var bullet_speed: float = 1000
-			var spread: float = 0.1 + 1.0 / shoot_amount
+			var spread: float = 0.1 + 0.7 / shoot_amount
 			var color: Color = Color.AQUA
 			if Input.is_action_pressed("focus"):
 				shoot_amount -= 2
-				spread *= 0.25
+				spread *= 0.35
 				bullet_speed *= 1.5
-				shoot_countdown *= 0.5
+				shoot_countdown *= 0.75
 				color = Color.BLUE
 			for i in range(shoot_amount):
 				var bullet = Game.spawn_bullet_player(bullet_scene, color)

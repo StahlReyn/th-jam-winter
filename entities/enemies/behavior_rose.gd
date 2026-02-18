@@ -45,6 +45,7 @@ func cooldown_finish() -> void:
 
 func dash() -> void:
 	can_dash = false
+	timer_cooldown.stop()
 	var prev_process = behavior_move.process_mode
 	behavior_move.process_mode = Node.PROCESS_MODE_DISABLED
 	
@@ -79,7 +80,7 @@ func shoot_set(amount: float, interval: float) -> void:
 	pat.bullet_color = Color.RED
 	pat.petal_count = 1
 	pat.petal_size = 4
-	pat.arc_angle = PI/4
+	pat.arc_angle = PI/5
 	pat.speed_min = 700
 	pat.speed_max = 1400
 	pat.rotation = entity.global_position.angle_to_point(player.global_position)

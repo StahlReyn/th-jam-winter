@@ -54,7 +54,7 @@ metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="PlayerUI/Bars/SnowDisplay/SnowBar" unique_id=2002435561]
 layout_mode = 2
-text = "100/100"
+text = "99.99%"
 label_settings = ExtResource("3_boway")
 metadata/_edit_lock_ = true
 
@@ -64,7 +64,7 @@ texture_filter = 1
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-value = 1.0
+value = 0.8
 texture_under = ExtResource("4_6xca8")
 texture_progress = ExtResource("4_53imn")
 tint_under = Color(0.5911141, 0.591114, 0.59111404, 1)
@@ -72,7 +72,7 @@ metadata/_edit_lock_ = true
 
 [node name="Marker" type="Sprite2D" parent="PlayerUI/Bars/SnowDisplay" unique_id=529265886]
 texture_filter = 1
-position = Vector2(389, 12)
+position = Vector2(408, 12)
 texture = ExtResource("6_3ofbv")
 
 [node name="PowerDisplay" type="Node2D" parent="PlayerUI/Bars" unique_id=1997012006]

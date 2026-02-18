@@ -48,7 +48,7 @@ func shoot_main() -> void:
 func shoot_spiral(amount: float, rotation: float, interval: float) -> void:
 	var p_circle := PatternCircle.new()
 	p_circle.bullet_scene = BULLET_SCENE
-	p_circle.bullet_color = Color.YELLOW
+	p_circle.bullet_color = Color.ORANGE_RED
 	p_circle.amount = 6
 	p_circle.speed = -400
 	p_circle.acceleration = 350
