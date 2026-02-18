@@ -39,7 +39,8 @@ radius = 72.0
 [node name="FairySunflower" type="Area2D" unique_id=495896401 groups=["enemy"]]
 texture_filter = 1
 script = ExtResource("1_5a88k")
-mhp = 80
+power_drop = 10
+mhp = 48
 push_force = 300.0
 push_receive = 0.5
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"

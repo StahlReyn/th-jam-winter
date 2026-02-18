@@ -40,5 +40,6 @@ func _on_area_entered(area: Area2D) -> void:
 		AudioManager.play_hit()
 		despawn()
 	elif area is GrazeArea:
+		Game.add_score(50)
 		Game.graze += 1
 		AudioManager.play_graze()

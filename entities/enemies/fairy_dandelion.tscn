@@ -38,7 +38,9 @@ radius = 56.0
 
 [node name="FairyDandelion" type="Area2D" unique_id=495896401 groups=["alive_enemy", "enemy"]]
 script = ExtResource("1_kdgxj")
-mhp = 25
+score_drop = 3000
+power_drop = 3
+mhp = 16
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]

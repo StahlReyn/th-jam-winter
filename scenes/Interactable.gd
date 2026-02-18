@@ -9,6 +9,7 @@ signal froze
 @export var power_amount: int = 25
 @export var heal_amount: int = 10
 @export var max_health_amount: int = 5
+@export var score_drop: int = 20000
 @export_category("Visuals")
 @export var main_sprite: Sprite2D
 @export var freeze_bar: TextureProgressBar
@@ -58,6 +59,7 @@ func turn_frozen():
 	player.mhp += max_health_amount
 	player.heal(heal_amount)
 	Game.add_power(power_amount)
+	Game.add_score(score_drop)
 	
 	if shake_tween.is_running():
 		shake_tween.stop()

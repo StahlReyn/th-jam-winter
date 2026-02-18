@@ -15,6 +15,7 @@ var timer_check: Timer
 var can_dash: bool = false
 
 func _ready() -> void:
+	add_to_group("stop_on_win")
 	timer_cooldown = Timer.new()
 	timer_cooldown.timeout.connect(cooldown_finish)
 	add_child(timer_cooldown)
@@ -32,6 +33,8 @@ func disable() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 func check_dash() -> void:
+	if not is_inside_tree() or Game.is_game_won:
+		return
 	var player := Game.get_player()
 	var dist_sq: float = entity.position.distance_squared_to(player.position)
 	if dist_sq < 500**2 and can_dash:

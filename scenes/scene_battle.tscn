@@ -10,12 +10,21 @@
 [ext_resource type="Texture2D" uid="uid://xdfhn3d3hjwb" path="res://assets/img/snow.png" id="6_e7kjp"]
 [ext_resource type="Script" uid="uid://ylx35lqj7fdq" path="res://scenes/draw_viewport.gd" id="6_is3ya"]
 [ext_resource type="LabelSettings" uid="uid://34atilf1kb6r" path="res://assets/control_themes/label_main.tres" id="6_tmjjs"]
+[ext_resource type="FontFile" uid="uid://wqcv5nneer8f" path="res://assets/fonts/Sriracha-Regular.ttf" id="7_y12tl"]
 [ext_resource type="Texture2D" uid="uid://b4xeeo7ajqrvp" path="res://assets/img/brush_snow.png" id="8_pxl38"]
 [ext_resource type="Texture2D" uid="uid://d4d6a7tso7snn" path="res://assets/img/map_spring.png" id="8_xn66u"]
 [ext_resource type="Texture2D" uid="uid://c038ay8xmnjuj" path="res://assets/img/brush_snow_2.png" id="10_qga8c"]
 [ext_resource type="AudioStream" uid="uid://bjl52jx2w1tqb" path="res://assets/audio/bgm/projectileslop.ogg" id="12_jmar4"]
 [ext_resource type="Script" uid="uid://b5ck8arntrlgj" path="res://scenes/stage_handler.gd" id="12_tfcxk"]
 [ext_resource type="PackedScene" uid="uid://ctlfxhbv7l0o8" path="res://entities/tree.tscn" id="15_tmjjs"]
+[ext_resource type="AudioStream" uid="uid://bmlc13pa8yps1" path="res://assets/audio/sfx/game_win.mp3" id="17_nrdcf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nrdcf"]
+font = ExtResource("7_y12tl")
+font_size = 95
+font_color = Color(0.41000003, 0.8623335, 1, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pr842"]
 blend_mode = 3
@@ -38,11 +47,12 @@ metadata/_edit_lock_ = true
 follow_node = NodePath("../Player")
 metadata/_edit_lock_ = true
 
-[node name="CenterGradient" type="Sprite2D" parent="GameCamera" unique_id=389933737]
+[node name="LosePopup" type="Sprite2D" parent="GameCamera" unique_id=389933737]
 texture_filter = 1
+position = Vector2(0, -320)
 texture = ExtResource("4_jmar4")
 
-[node name="Label" type="Label" parent="GameCamera/CenterGradient" unique_id=1416544201]
+[node name="Label" type="Label" parent="GameCamera/LosePopup" unique_id=1416544201]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -57,7 +67,7 @@ grow_vertical = 2
 text = "YOU DIED"
 label_settings = ExtResource("5_xn66u")
 
-[node name="Label2" type="Label" parent="GameCamera/CenterGradient" unique_id=795198109]
+[node name="Label2" type="Label" parent="GameCamera/LosePopup" unique_id=795198109]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -69,7 +79,58 @@ offset_right = -816.5
 offset_bottom = -133.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Press [Z] to Restart"
+text = "Press [X] to Restart"
+label_settings = ExtResource("6_tmjjs")
+
+[node name="WinPopup" type="Sprite2D" parent="GameCamera" unique_id=883320625]
+texture_filter = 1
+position = Vector2(0, -320)
+texture = ExtResource("4_jmar4")
+
+[node name="Label" type="Label" parent="GameCamera/WinPopup" unique_id=1590781407]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -980.0
+offset_top = -251.5
+offset_right = -940.0
+offset_bottom = -228.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN!"
+label_settings = SubResource("LabelSettings_nrdcf")
+
+[node name="Label2" type="Label" parent="GameCamera/WinPopup" unique_id=678195310]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1103.5
+offset_top = -191.0
+offset_right = -816.5
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press [X] to Restart"
+label_settings = ExtResource("6_tmjjs")
+
+[node name="Stats" type="Label" parent="GameCamera/WinPopup" unique_id=1416840944]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -556.0
+offset_top = -296.0
+offset_right = -267.0
+offset_bottom = -187.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Time Bonus: 123456
+Final Score: 123456"
 label_settings = ExtResource("6_tmjjs")
 
 [node name="GameMap" type="Node2D" parent="." unique_id=632482707]
@@ -116,11 +177,15 @@ metadata/_edit_lock_ = true
 [node name="StageHandler" type="Node" parent="." unique_id=1566043013]
 script = ExtResource("12_tfcxk")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=12709723]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=12709723]
 stream = ExtResource("12_jmar4")
 volume_db = -8.0
 autoplay = true
 parameters/looping = true
+
+[node name="WinSound" type="AudioStreamPlayer" parent="." unique_id=191337261]
+stream = ExtResource("17_nrdcf")
+pitch_scale = 0.5
 
 [node name="CoverageTimer" type="Timer" parent="." unique_id=691314355]
 process_callback = 0

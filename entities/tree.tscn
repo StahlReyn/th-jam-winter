@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bj288cclnjros" path="res://assets/img/charge_progress.png" id="3_ows8r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y12tl"]
-radius = 40.0
+radius = 50.0
 
 [node name="Tree" type="Area2D" unique_id=1083082583 node_paths=PackedStringArray("main_sprite", "freeze_bar")]
 texture_filter = 1
@@ -23,7 +23,7 @@ metadata/_edit_lock_ = true
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=28668244]
 scale = Vector2(3, 3)
 texture = ExtResource("2_ows8r")
-offset = Vector2(0, -115)
+offset = Vector2(0, -110)
 hframes = 4
 vframes = 4
 frame = 5

@@ -30,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 	
 	stat_label.text = (
 		"Time: " + "%.2f" % Game.game_time +
+		"\nScore: " + str(Game.score) +
 		"\nGraze: " + str(Game.graze) + 
 		"\nEnemies: " + str(Game.get_alive_enemy_count())
 	)

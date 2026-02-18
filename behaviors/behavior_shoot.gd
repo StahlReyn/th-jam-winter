@@ -9,10 +9,11 @@ var countdown: float = 0.0
 var bullet_scene: PackedScene = preload("res://entities/bullets/bullet_small.tscn")
 
 func _ready() -> void:
+	add_to_group("stop_on_win")
 	countdown = cooldown
 
 func _physics_process(delta: float) -> void:
-	if not entity.is_active:
+	if not entity.is_active or Game.is_game_won:
 		return
 	countdown -= delta
 	

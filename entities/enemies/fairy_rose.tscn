@@ -38,7 +38,9 @@ radius = 70.0
 
 [node name="FairyRose" type="Area2D" unique_id=495896401 groups=["alive_enemy", "enemy"]]
 script = ExtResource("1_fw6gk")
-mhp = 40
+score_drop = 5000
+power_drop = 5
+mhp = 24
 push_force = 250.0
 push_receive = 0.4
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"

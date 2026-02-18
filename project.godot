@@ -35,6 +35,12 @@ window/size/viewport_height=1080
 window/size/borderless=true
 window/stretch/mode="viewport"
 
+[file_customization]
+
+folder_colors={
+"res://entities/enemies/": "red"
+}
+
 [global_group]
 
 player=""
@@ -42,6 +48,7 @@ enemy=""
 alive_enemy=""
 interactable=""
 frozen_interactable=""
+stop_on_win=""
 
 [input]
 

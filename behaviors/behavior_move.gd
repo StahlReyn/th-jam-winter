@@ -22,6 +22,7 @@ var state_check_timer: Timer
 var cur_state = State.FOLLOW
 
 func _ready() -> void:
+	add_to_group("stop_on_win")
 	state_check_timer = Timer.new()
 	state_check_timer.wait_time = state_check_interval
 	state_check_timer.timeout.connect(update_state)
@@ -40,6 +41,8 @@ func _physics_process(delta: float) -> void:
 	if cur_state == State.AVOID:
 		final_speed = -avoid_speed
 	elif cur_state == State.IDLE:
+		final_speed = 0.0
+	if Game.is_game_won:
 		final_speed = 0.0
 	entity.position += dir * final_speed * delta
 	

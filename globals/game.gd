@@ -1,10 +1,13 @@
 extends Node
 
 var player: Player
+var score: int = 0
 var power: int = 0
 var graze: int = 0
 var game_time: float = 0.0
 var coverage_ratio: float = 0.0
+
+var is_game_won: bool = false
 
 var max_power: int = 400
 const map_size: Vector2 = Vector2(4096, 4096)
@@ -18,10 +21,15 @@ func get_player() -> Player:
 	return player
 
 func reset_game_variables() -> void:
+	is_game_won = false
+	score = 0
 	power = 0
 	graze = 0
 	game_time = 0.0
 	coverage_ratio = 0.0
+
+func add_score(amount: int) -> void:
+	score += amount
 
 func add_power(amount: int) -> void:
 	power += amount

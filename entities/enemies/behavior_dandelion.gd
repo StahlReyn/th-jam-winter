@@ -12,6 +12,7 @@ const BULLET_SCENE: PackedScene = preload("res://entities/bullets/bullet_dot.tsc
 var timer: Timer
 
 func _ready() -> void:
+	add_to_group("stop_on_win")
 	timer = Timer.new()
 	timer.timeout.connect(shoot_main)
 	add_child(timer)
@@ -40,7 +41,7 @@ func shoot_main() -> void:
 	await shoot_spiral(8, -TAU/17, 0.05)
 	
 	behavior_move.process_mode = prev_process
-	if not is_inside_tree():
+	if not is_inside_tree() or Game.is_game_won:
 		return
 	timer.start(cooldown)
 	
