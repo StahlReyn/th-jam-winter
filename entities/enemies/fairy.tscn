@@ -39,7 +39,6 @@ radius = 40.0
 [node name="Fairy" type="Area2D" unique_id=495896401 groups=["alive_enemy", "enemy", "stop_on_win"]]
 script = ExtResource("1_gyh76")
 score_drop = 1000
-mhp = 8
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
@@ -62,6 +61,7 @@ base_width = 0.7
 [node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
 script = ExtResource("5_fpqfm")
 main_sprite = NodePath("../AnimatedSprite2D")
+move_speed = 220.0
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://c0efxniyajt0p"
 

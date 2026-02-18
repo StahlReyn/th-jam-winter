@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ylx35lqj7fdq" path="res://scenes/draw_viewport.gd" id="6_is3ya"]
 [ext_resource type="LabelSettings" uid="uid://34atilf1kb6r" path="res://assets/control_themes/label_main.tres" id="6_tmjjs"]
 [ext_resource type="FontFile" uid="uid://wqcv5nneer8f" path="res://assets/fonts/Sriracha-Regular.ttf" id="7_y12tl"]
+[ext_resource type="Texture2D" uid="uid://baw4agnm10n5b" path="res://assets/img/wave_banner.png" id="8_lei81"]
 [ext_resource type="Texture2D" uid="uid://b4xeeo7ajqrvp" path="res://assets/img/brush_snow.png" id="8_pxl38"]
 [ext_resource type="Texture2D" uid="uid://d4d6a7tso7snn" path="res://assets/img/map_spring.png" id="8_xn66u"]
 [ext_resource type="Texture2D" uid="uid://c038ay8xmnjuj" path="res://assets/img/brush_snow_2.png" id="10_qga8c"]
@@ -23,6 +24,13 @@
 font = ExtResource("7_y12tl")
 font_size = 95
 font_color = Color(0.41000003, 0.8623335, 1, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uc42e"]
+font = ExtResource("7_y12tl")
+font_size = 65
+font_color = Color(0.9999997, 0.5661817, 0.9941812, 1)
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
@@ -132,6 +140,28 @@ grow_vertical = 2
 text = "Time Bonus: 123456
 Final Score: 123456"
 label_settings = ExtResource("6_tmjjs")
+
+[node name="WavePopup" type="Sprite2D" parent="GameCamera" unique_id=566880634]
+texture_filter = 1
+position = Vector2(0, -425)
+texture = ExtResource("8_lei81")
+
+[node name="Label" type="Label" parent="GameCamera/WavePopup" unique_id=122119191]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1208.0
+offset_top = -173.0
+offset_right = -712.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Spring is Coming!"
+label_settings = SubResource("LabelSettings_uc42e")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GameMap" type="Node2D" parent="." unique_id=632482707]
 z_index = -100

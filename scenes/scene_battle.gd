@@ -10,8 +10,13 @@ signal game_won
 @onready var lose_popup: Node2D = $GameCamera/LosePopup
 @onready var win_popup: Node2D = $GameCamera/WinPopup
 @onready var stats_label: Label = $GameCamera/WinPopup/Stats
+@onready var wave_popup: Node2D = $GameCamera/WavePopup
 
 @onready var audio_win: AudioStreamPlayer = $WinSound
+@onready var audio_music: AudioStreamPlayer = $Music
+
+const MUSIC_NORMAL: AudioStream = preload("res://assets/audio/bgm/projectileslop.ogg")
+const MUSIC_BOSS: AudioStream = preload("res://assets/audio/bgm/lettyslop.ogg")
 
 var game_over: bool = false
 var game_win: bool = false
@@ -23,6 +28,7 @@ func _ready() -> void:
 	Game.set_player(player)
 	lose_popup.modulate = Color(1,1,1,0)
 	win_popup.modulate = Color(1,1,1,0)
+	wave_popup.modulate = Color(1,1,1,0)
 	stage_handler.test_wave()
 
 func _physics_process(delta: float) -> void:
@@ -68,6 +74,23 @@ func win_game() -> void:
 	tween.tween_interval(1.0)
 	await tween.finished
 	can_restart = true
+
+func start_wave() -> void:
+	AudioManager.play_spellcard()
+	var tween := create_tween()
+	tween.tween_property(wave_popup, "modulate", Color(1,1,1,1), 1.0)
+	tween.parallel().tween_property(audio_music, "volume_db", -80, 1.0)
+	tween.tween_interval(1.0)
+	tween.tween_callback(func f():
+		audio_music.stop()
+		audio_music.stream = MUSIC_BOSS
+	)
+	tween.tween_property(wave_popup, "modulate", Color(1,1,1,0), 1.0)
+	tween.parallel().tween_callback(func f():
+		audio_music.volume_db = -8
+		audio_music.play()
+	)
+	await tween.finished
 	
 func _on_player_died() -> void:
 	game_over = true

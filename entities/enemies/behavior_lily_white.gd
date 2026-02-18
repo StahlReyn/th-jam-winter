@@ -1,8 +1,8 @@
-class_name BehaviorSunflower
+class_name BehaviorLilyWhite
 extends EntityBehavior
 
 @export var start_cooldown: float = 5.0
-@export var cooldown: float = 12.0
+@export var cooldown: float = 20.0
 
 @export var main_sprite: AnimatedSprite2D
 @export var behavior_move: BehaviorMove
@@ -37,8 +37,9 @@ func shoot_main() -> void:
 	tween.tween_property(main_sprite, "scale", prev_scale, 0.5).set_trans(Tween.TRANS_ELASTIC)
 	tween.parallel().tween_property(main_sprite, "modulate", Color.WHITE, 0.5).set_trans(Tween.TRANS_QUAD)
 	
-	shoot_spiral(20, TAU/40, 0.05)
-	await shoot_spiral(20, -TAU/40, 0.05)
+	shoot_circle(6, TAU/67, 0.3)
+	shoot_spiral(32, TAU/67, 0.05)
+	await shoot_spiral(32, -TAU/67, 0.05)
 	
 	behavior_move.process_mode = prev_process
 	if not is_inside_tree() or Game.is_game_won:
@@ -48,13 +49,28 @@ func shoot_main() -> void:
 func shoot_spiral(amount: float, rotation: float, interval: float) -> void:
 	var p_circle := PatternCircle.new()
 	p_circle.bullet_scene = BULLET_SCENE
-	p_circle.bullet_color = Color.YELLOW
+	p_circle.bullet_color = Color.PINK
 	p_circle.amount = 6
-	p_circle.speed = -400
+	p_circle.speed = -450
 	p_circle.acceleration = 350
 
 	for i in range(amount):
 		AudioManager.play_shoot_soft()
+		p_circle.position = entity.global_position
+		p_circle.create()
+		p_circle.rotation += rotation
+		await create_tween().tween_interval(interval).finished
+
+func shoot_circle(amount: float, rotation: float, interval: float) -> void:
+	var p_circle := PatternCircle.new()
+	p_circle.bullet_scene = BULLET_SCENE
+	p_circle.bullet_color = Color.YELLOW
+	p_circle.amount = 32
+	p_circle.speed = 0
+	p_circle.acceleration = 500
+	
+	for i in range(amount):
+		AudioManager.play_shoot1()
 		p_circle.position = entity.global_position
 		p_circle.create()
 		p_circle.rotation += rotation

@@ -98,8 +98,8 @@ texture = ExtResource("10_uyp6b")
 [node name="PlayerMovement" type="Node" parent="." unique_id=1118973317 node_paths=PackedStringArray("player", "player_sprite", "focus_sprite", "graze_sprite")]
 script = ExtResource("5_qly61")
 player = NodePath("..")
-speed = 800
-focus_speed = 400
+speed = 750
+focus_speed = 375
 player_sprite = NodePath("../AnimatedSprite2D")
 focus_sprite = NodePath("../FocusDot")
 graze_sprite = NodePath("../GrazeCircle")

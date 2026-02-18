@@ -40,7 +40,7 @@ radius = 72.0
 texture_filter = 1
 script = ExtResource("1_5a88k")
 power_drop = 10
-mhp = 48
+mhp = 80
 push_force = 300.0
 push_receive = 0.5
 metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
@@ -64,7 +64,7 @@ base_width = 0.7
 [node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
 script = ExtResource("5_vj8ew")
 main_sprite = NodePath("../AnimatedSprite2D")
-move_speed = 240.0
+move_speed = 300.0
 stop_distance = 500.0
 avoid_distance = 400.0
 avoid_speed = 180.0

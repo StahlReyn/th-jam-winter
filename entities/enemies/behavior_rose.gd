@@ -48,9 +48,12 @@ func dash() -> void:
 	var prev_process = behavior_move.process_mode
 	behavior_move.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	var prev_scale = main_sprite.scale
+	var squish_scale: Vector2 = Vector2(1.25, 0.75)
+	if main_sprite.scale.x < 1:
+		squish_scale.x *= -1
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(main_sprite, "scale", prev_scale * Vector2(1.2, 0.8), 0.5)
+	tween.tween_interval(0.2)
+	tween.tween_property(main_sprite, "scale", squish_scale, 0.75)
 	tween.parallel().tween_property(main_sprite, "modulate", Color.WHITE * 2, 0.5)
 	await tween.finished
 	
@@ -60,7 +63,7 @@ func dash() -> void:
 	
 	tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(entity, "global_position", target_pos, 1.0).set_trans(Tween.TRANS_QUAD)
-	tween.parallel().tween_property(main_sprite, "scale", prev_scale, 0.5).set_trans(Tween.TRANS_ELASTIC)
+	tween.parallel().tween_property(main_sprite, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_ELASTIC)
 	tween.parallel().tween_property(main_sprite, "modulate", Color.WHITE, 0.5).set_trans(Tween.TRANS_QUAD)	
 	
 	shoot_set(6, 0.1)

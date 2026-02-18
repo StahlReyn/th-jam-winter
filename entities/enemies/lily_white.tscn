@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://cwne248q6iujp"]
+
+[ext_resource type="Script" uid="uid://bj7e1wqn4spo8" path="res://entities/enemy.gd" id="1_0lep4"]
+[ext_resource type="Texture2D" uid="uid://ddwhjgdit8mmm" path="res://assets/img/lily_white.png" id="2_0lep4"]
+[ext_resource type="Texture2D" uid="uid://bedk53cmn2h2b" path="res://assets/img/shadow.png" id="3_iqu7n"]
+[ext_resource type="Script" uid="uid://dxela363nue6k" path="res://entities/shadow.gd" id="4_s6pht"]
+[ext_resource type="Script" uid="uid://c0efxniyajt0p" path="res://behaviors/behavior_move.gd" id="5_6payg"]
+[ext_resource type="Script" uid="uid://bt8j5o8i3nqnv" path="res://behaviors/behavior_death.gd" id="6_s51ac"]
+[ext_resource type="Script" uid="uid://b7wcbedd5f40v" path="res://behaviors/behavior_hurt.gd" id="7_acfv6"]
+[ext_resource type="Script" uid="uid://k8874lbn0lpd" path="res://behaviors/behavior_spawn.gd" id="8_j8m2p"]
+[ext_resource type="Script" uid="uid://dxry1e8r1pi6d" path="res://behaviors/behavior_float.gd" id="9_f43j1"]
+[ext_resource type="Texture2D" uid="uid://dxeyexy71umwy" path="res://assets/img/hpbar_under.png" id="11_s6pht"]
+[ext_resource type="Texture2D" uid="uid://ttbv1ktr5w1w" path="res://assets/img/hpbar_progress.png" id="12_6payg"]
+[ext_resource type="Script" uid="uid://c383hte5xodw6" path="res://entities/enemies/enemy_health_bar.gd" id="13_s51ac"]
+[ext_resource type="Script" uid="uid://dnwdjjt34mqs5" path="res://entities/enemies/behavior_lily_white.gd" id="14_6payg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf72e"]
+atlas = ExtResource("2_0lep4")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqu7n"]
+atlas = ExtResource("2_0lep4")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rw6p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf72e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqu7n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_im3hm"]
+radius = 90.0
+
+[node name="LilyWhite" type="Area2D" unique_id=495896401 groups=["enemy"]]
+texture_filter = 1
+script = ExtResource("1_0lep4")
+score_drop = 100000
+power_drop = 50
+mhp = 500
+push_force = 400.0
+push_receive = 0.3
+metadata/_custom_type_script = "uid://bj7e1wqn4spo8"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=764418455]
+sprite_frames = SubResource("SpriteFrames_2rw6p")
+frame = 1
+frame_progress = 0.5394214
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397573921]
+shape = SubResource("CircleShape2D_im3hm")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=46068130 node_paths=PackedStringArray("main_sprite")]
+self_modulate = Color(1, 1, 1, 0.2627451)
+z_index = -1
+position = Vector2(0, 90)
+texture = ExtResource("3_iqu7n")
+script = ExtResource("4_s6pht")
+main_sprite = NodePath("../AnimatedSprite2D")
+base_width = 0.7
+
+[node name="BehaviorMove" type="Node" parent="." unique_id=508717672 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("5_6payg")
+main_sprite = NodePath("../AnimatedSprite2D")
+move_speed = 240.0
+stop_distance = 500.0
+avoid_distance = 400.0
+avoid_speed = 180.0
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://c0efxniyajt0p"
+
+[node name="BehaviorDeath" type="Node" parent="." unique_id=1488842329 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("6_s51ac")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bt8j5o8i3nqnv"
+
+[node name="BehaviorHurt" type="Node" parent="." unique_id=1665522577 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("7_acfv6")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://b7wcbedd5f40v"
+
+[node name="BehaviorSpawn" type="Node" parent="." unique_id=1676203199 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("8_j8m2p")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://k8874lbn0lpd"
+
+[node name="BehaviorFloat" type="Node" parent="." unique_id=1963143580 node_paths=PackedStringArray("main_sprite", "entity")]
+script = ExtResource("9_f43j1")
+main_sprite = NodePath("../AnimatedSprite2D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://dxry1e8r1pi6d"
+
+[node name="BehaviorLilyWhite" type="Node" parent="." unique_id=803166785 node_paths=PackedStringArray("main_sprite", "behavior_move", "entity")]
+script = ExtResource("14_6payg")
+main_sprite = NodePath("../AnimatedSprite2D")
+behavior_move = NodePath("../BehaviorMove")
+entity = NodePath("..")
+
+[node name="EnemyHealthBar" type="TextureProgressBar" parent="." unique_id=68050636 node_paths=PackedStringArray("enemy")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_under = ExtResource("11_s6pht")
+texture_progress = ExtResource("12_6payg")
+script = ExtResource("13_s51ac")
+enemy = NodePath("..")
+
+[connection signal="died" from="." to="BehaviorDeath" method="_on_enemy_died"]
+[connection signal="died" from="." to="BehaviorFloat" method="_on_enemy_died"]
+[connection signal="spawned" from="." to="BehaviorSpawn" method="_on_entity_spawn"]
+[connection signal="spawned" from="." to="BehaviorFloat" method="_on_enemy_spawned"]
+[connection signal="took_damage" from="." to="BehaviorHurt" method="_on_entity_took_damage"]

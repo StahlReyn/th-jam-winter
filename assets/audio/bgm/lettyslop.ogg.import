@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/lettyslop.ogg-9d87215934aed7acdb7b95a9eb7cf40
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=26.1
+bpm=0.0
 beat_count=0
 bar_beats=4
